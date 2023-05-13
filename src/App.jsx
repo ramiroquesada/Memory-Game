@@ -4,10 +4,12 @@ import { Game } from './components/Game';
 import { store } from './redux/store';
 
 export const App = () => {
+
+
 	return (
 		<Provider store={store}>
 			<Layout>
-				<Game></Game>
+				<Game />
 			</Layout>
 		</Provider>
 	);

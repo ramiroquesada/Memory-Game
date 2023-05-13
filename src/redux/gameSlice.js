@@ -3,28 +3,52 @@ import { createSlice } from '@reduxjs/toolkit'
 export const gameSlice = createSlice({
 	name: 'game',
 	initialState: {
-		cards: [],
+		allCards: [],
+		gameCards:[],
 		clickedCards: [],
-		gameOver: false
+		gameOver: false,
+		record : 0,
 	},
 
 	reducers: {
 
-		onSetCards: (state, {payload}) => {
-			state.cards =  payload;
+		onSetAllCards: (state, {payload}) => {
+			state.allCards =  payload;
 		},
 
 		onSelectCard: (state, {payload}) => {
-			if (state.clickedCards.includes(payload)) {
-				state.gameOver = true;
-				return
-			}
+			
+			state.clickedCards.push(payload.displayName)
+		},
 
-			state.clickedCards = clickedCards.push(payload)
+		onGameOver: (state) => {
+			state.gameOver = true;
+		},
+
+		shuffleCards: (state) => {
+
+			const newArray = [...state.allCards]?.sort(() => Math.random() - 0.5);
+
+			state.gameCards = newArray.slice(0, 9);
+		},
+
+		onSetGameCards: (state) => {
+
+			state.clickedCards = [];
+
+			const newArray = [...state.allCards]?.sort(() => Math.random() - 0.5);
+
+			state.gameCards = newArray.slice(0, 9);
+
+			state.gameOver = false;
+		},
+
+		onSetNewRecord: (state, {payload}) => {
+			state.record = payload
 		}
 
 		
 	},
 })
 
-export const { onSetCards, onSelectCard } = gameSlice.actions
+export const { onSetAllCards, onSelectCard, onGameOver, shuffleCards, onSetGameCards, onSetNewRecord } = gameSlice.actions

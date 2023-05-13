@@ -7,7 +7,7 @@ export const valoApi = async() => {
 
 		const {data} = await resp.json()
 
-		const agents = data.slice(9, 21)
+		const agents = data
 
 
 		return agents
