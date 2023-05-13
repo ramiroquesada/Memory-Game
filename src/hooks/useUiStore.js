@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onCloseModal, onOpenModal } from "../redux/uiSlice";
+import { onCloseModal, onOpenModalLose, onOpenModalWin } from "../redux/uiSlice";
 
 export const useUiStore = () => {
 
 	const dispatch = useDispatch();
 
-	const {isModalOpen} = useSelector(state => state.ui);
+	const {isModalOpen, msg} = useSelector(state => state.ui);
 
-	const openModal = () => {
-		dispatch( onOpenModal() )
+
+	const openModalWin = () => {
+		dispatch( onOpenModalWin() )
+	}
+	const openModalLose = () => {
+		dispatch( onOpenModalLose() )
 	}
 
 	const closeModal = () => {
@@ -17,8 +21,10 @@ export const useUiStore = () => {
 
 	return {
 		isModalOpen,
+		msg,
 
-		openModal,
+		openModalWin,
+		openModalLose,
 		closeModal,
 	};
 };

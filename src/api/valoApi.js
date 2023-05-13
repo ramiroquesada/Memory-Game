@@ -7,10 +7,21 @@ export const valoApi = async() => {
 
 		const {data} = await resp.json()
 
-		const agents = data
 
-
-		return agents
+		const agents = data.filter(objeto => {
+			if (objeto.isPlayableCharacter) {
+				return true;
+			}
+			return false;
+		}).map(objeto => {
+			return {
+				uuid: objeto.uuid,
+				displayName: objeto.displayName,
+				displayIcon: objeto.displayIcon
+			};
+		});
+		
+		return agents.slice(0,3)
 
 		
 

@@ -3,19 +3,27 @@ import { createSlice } from '@reduxjs/toolkit'
 export const uiSlice = createSlice({
 	name: 'ui',
 	initialState: {
-		isModalOpen: false
+		isModalOpen: false,
+		msg: null
 	},
 
 	reducers: {
 
-		onOpenModal: (state) => {
+		onOpenModalWin: (state) => {
+			state.msg = 'Felicidades ganaste 😎';
+			state.isModalOpen = true;
+		},
+		onOpenModalLose: (state) => {
+			state.msg = 'Lástima perdiste 😂';
 			state.isModalOpen = true;
 		},
 		onCloseModal: (state) => {
 			state.isModalOpen = false;
+			state.msg = null;
 		},
+		
 
 	},
 })
 
-export const { onOpenModal, onCloseModal } = uiSlice.actions
+export const { onOpenModalWin, onOpenModalLose, onCloseModal, msg, isModalOpen } = uiSlice.actions

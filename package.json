@@ -1,6 +1,6 @@
 {
   "name": "memory-game",
-	"homepage": "https://ramessj.github.io/Memory-Game",
+  "homepage": "https://ramessj.github.io/Memory-Game",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "js-confetti": "^0.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",

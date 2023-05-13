@@ -7,20 +7,20 @@ import {
 	onSetGameCards,
 	shuffleCards,
 	onSetNewRecord,
+	onWin,
 } from '../redux/gameSlice';
-import { onCloseModal, onOpenModal } from '../redux/uiSlice';
+import {
+	onCloseModal,
+	onOpenModalWin,
+	onOpenModalLose,
+} from '../redux/uiSlice';
 
 export const useGameStore = () => {
 	const dispatch = useDispatch();
 
-	const {
-		allCards,
-		clickedCards,
-		record,
-		gameCards,
-		gameOver,
-		
-	} = useSelector((state) => state.game);
+	const { allCards, clickedCards, record, gameCards, gameOver } = useSelector(
+		(state) => state.game
+	);
 
 	const startGettingCards = async () => {
 		let localStorageCards = JSON.parse(localStorage.getItem('allCards'));
@@ -39,19 +39,22 @@ export const useGameStore = () => {
 	};
 
 	const onAddToClicked = (card) => {
-		if (clickedCards.includes(card.displayName)) {
+		dispatch(onSelectCard(card));
+
+		if (clickedCards.length === allCards.length - 1) {
+			dispatch(onWin());
+			dispatch(onGameOver());
+			dispatch(onOpenModalWin());
+		} else if (clickedCards.includes(card)) {
 			dispatch(onGameOver());
 
-
 			if (clickedCards.length > record) {
-				console.log('aaaaaa')
 				localStorage.setItem('record', clickedCards.length);
 				dispatch(onSetNewRecord(localStorage.getItem('record')));
 			}
 
-			dispatch(onOpenModal());
+			dispatch(onOpenModalLose());
 		} else {
-			dispatch(onSelectCard(card));
 			dispatch(shuffleCards());
 		}
 	};
