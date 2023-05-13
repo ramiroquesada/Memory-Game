@@ -21,7 +21,7 @@ export const valoApi = async() => {
 			};
 		});
 		
-		return agents.slice(0,9)
+		return agents
 
 		
 

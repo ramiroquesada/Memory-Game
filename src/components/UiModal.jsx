@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
+import { Button } from '@mui/material';
 import { useUiStore } from '../hooks/useUiStore';
-import { Button, Typography } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
 
 const customStyles = {
@@ -9,7 +9,6 @@ const customStyles = {
 		left: '50%',
 		right: '50%',
 		bottom: '50%',
-		
 	},
 };
 
@@ -30,8 +29,12 @@ export const UiModal = () => {
 			className="modal"
 			overlayClassName="modal-fondo"
 			closeTimeoutMS={200}>
+			<div className="modalContainer">
 				<h2>{msg}</h2>
-			<Button onClick={onRestartGame}>Jugar de nuevo</Button>
+				<Button variant="contained" onClick={onRestartGame}>
+					Jugar de nuevo
+				</Button>
+			</div>
 		</Modal>
 	);
 };

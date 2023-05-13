@@ -16,12 +16,7 @@ export const gameSlice = createSlice({
 		onSetAllCards: (state, {payload}) => {
 			state.allCards =  payload;
 		},
-
-		// onSelectCard: (state, {payload}) => {
-			
-		// 	state.clickedCards.push(payload.displayName)
-		// },
-
+		
 		onSelectCard: (state, {payload}) => {
 			state.clickedCards.push(payload);
 		},
@@ -34,7 +29,7 @@ export const gameSlice = createSlice({
 
 			const newArray = [...state.allCards]?.sort(() => Math.random() - 0.5);
 
-			state.gameCards = newArray.slice(0, 3);
+			state.gameCards = newArray.slice(0, 9);
 		},
 
 		
@@ -46,7 +41,7 @@ export const gameSlice = createSlice({
 
 			const newArray = [...state.allCards]?.sort(() => Math.random() - 0.5);
 
-			state.gameCards = newArray.slice(0, 3);
+			state.gameCards = newArray.slice(0, 9);
 
 			state.gameOver = false;
 		},

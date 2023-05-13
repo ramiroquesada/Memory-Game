@@ -1,4 +1,4 @@
-*::before, *::after {
+*, *::before, *::after {
 	box-sizing: border-box;
 }
 
@@ -8,16 +8,32 @@ body{
 
 	width: 100dvw;
 	height: 100dvh;
+	background-color: #FF4656;
+
 }
 
-main{
+html{
 	background-color: #FF4656;
+
+}
+
+#root{
+	height: 100dvh;
+	background-color: #FF4656;
+
+}
+
+.modalContainer{
+	display: flex;
+	flex-direction: column;
+	margin: 2rem;
+	gap: 1rem;
 }
 
 
 .pjCard{
 	cursor: pointer;
-	transition-duration: 500ms;
+	transition-duration: 300ms;
 }
 
 .pjCard:hover{
@@ -35,8 +51,8 @@ main{
 }
 
 .ReactModalPortal .ReactModal__Overlay {
-	align-items: center;
 	display: flex;
+	align-items: center;
 	justify-content: center;
 	transition: opacity .2s ease-in-out;
 	z-index: 999;

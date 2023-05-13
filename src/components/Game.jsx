@@ -38,8 +38,9 @@ export const Game = () => {
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
-				minHeight: 'calc(100dvh - 7rem)',
-				marginTop: '1rem',
+				minHeight: 'calc(100dvh - 4rem)',
+				// marginTop: '1rem',
+				// marginBottom: '1rem',
 			}}>
 			<Grid
 				container
@@ -57,7 +58,7 @@ export const Game = () => {
 					</Grid>
 				))}
 			</Grid>
-			{isModalOpen ? <UiModal /> : <></>}
+			{isModalOpen ? <UiModal /> : ''}
 		</Container>
 	);
 };

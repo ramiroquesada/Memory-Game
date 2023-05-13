@@ -39,22 +39,22 @@ export const useGameStore = () => {
 	};
 
 	const onAddToClicked = (card) => {
-		dispatch(onSelectCard(card));
-
+		
 		if (clickedCards.length === allCards.length - 1) {
 			dispatch(onWin());
 			dispatch(onGameOver());
 			dispatch(onOpenModalWin());
 		} else if (clickedCards.includes(card)) {
 			dispatch(onGameOver());
-
+			
 			if (clickedCards.length > record) {
 				localStorage.setItem('record', clickedCards.length);
 				dispatch(onSetNewRecord(localStorage.getItem('record')));
 			}
-
+			
 			dispatch(onOpenModalLose());
 		} else {
+			dispatch(onSelectCard(card));
 			dispatch(shuffleCards());
 		}
 	};
