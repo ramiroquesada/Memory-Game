@@ -18,9 +18,8 @@ import {
 export const useGameStore = () => {
 	const dispatch = useDispatch();
 
-	const { allCards, clickedCards, record, gameCards, gameOver } = useSelector(
-		(state) => state.game
-	);
+	const { allCards, clickedCards, record, gameCards, gameOver, isWin } =
+		useSelector((state) => state.game);
 
 	const startGettingCards = async () => {
 		let localStorageCards = JSON.parse(localStorage.getItem('allCards'));
@@ -39,19 +38,21 @@ export const useGameStore = () => {
 	};
 
 	const onAddToClicked = (card) => {
-		
-		if (clickedCards.length === allCards.length - 1) {
-			dispatch(onWin());
+		if (
+			clickedCards.length === allCards.length - 1 &&
+			!clickedCards.includes(card)
+		) {
 			dispatch(onGameOver());
+			dispatch(onWin());
 			dispatch(onOpenModalWin());
 		} else if (clickedCards.includes(card)) {
 			dispatch(onGameOver());
-			
+
 			if (clickedCards.length > record) {
 				localStorage.setItem('record', clickedCards.length);
 				dispatch(onSetNewRecord(localStorage.getItem('record')));
 			}
-			
+
 			dispatch(onOpenModalLose());
 		} else {
 			dispatch(onSelectCard(card));
@@ -78,6 +79,7 @@ export const useGameStore = () => {
 		gameCards,
 		record,
 		gameOver,
+		isWin,
 
 		startGettingCards,
 		onAddToClicked,
