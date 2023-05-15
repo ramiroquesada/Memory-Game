@@ -24,15 +24,6 @@ export const gameSlice = createSlice({
 			state.gameOver = true;
 		},
 
-		// shuffleCards: (state) => {
-
-		// 	const newArray = [...state.allCards]?.sort(() => Math.random() - 0.5);
-
-		// 	while (newArray.includes(state.clickedCards))
-
-		// 	state.gameCards = newArray.slice(0, 9);
-		// },
-
 		shuffleCards: (state) => {
 			const allCards = state.allCards;
 			const clickedCards = state.clickedCards;
