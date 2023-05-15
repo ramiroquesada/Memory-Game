@@ -1,33 +1,26 @@
-
-export const valoApi = async() => {
-
+export const valoApi = async () => {
 	try {
-		
-		const resp = await fetch('https://valorant-api.com/v1/agents')
+		const resp = await fetch('https://valorant-api.com/v1/agents');
 
-		const {data} = await resp.json()
+		const { data } = await resp.json();
 
+		const agents = data
+			.filter((objeto) => {
+				if (objeto.isPlayableCharacter) {
+					return true;
+				}
+				return false;
+			})
+			.map((objeto) => {
+				return {
+					uuid: objeto.uuid,
+					displayName: objeto.displayName,
+					displayIcon: objeto.displayIcon,
+				};
+			});
 
-		const agents = data.filter(objeto => {
-			if (objeto.isPlayableCharacter) {
-				return true;
-			}
-			return false;
-		}).map(objeto => {
-			return {
-				uuid: objeto.uuid,
-				displayName: objeto.displayName,
-				displayIcon: objeto.displayIcon
-			};
-		});
-		
-		return agents
-
-		
-
+		return agents;
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 	}
-
-
-}
+};
