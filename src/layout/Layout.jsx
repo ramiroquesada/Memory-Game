@@ -52,28 +52,28 @@ export const Layout = ({ children }) => {
 							fontSize={'1rem'}>
 							Memory Challenge
 						</Typography>
-						
 					</Toolbar>
 
 					<ClickAwayListener onClickAway={handleTooltipClose}>
-							<div>
-								<Tooltip
-									PopperProps={{
-										disablePortal: true,
-									}}
-									onClose={handleTooltipClose}
-									open={open}
-									disableFocusListener
-									disableTouchListener
-									title="Selecciona sin repetir para ganar">
-									<HelpIcon
-										onClick={handleTooltipOpen}
-										color="white"
-										style={{cursor: 'pointer'}}
-									/>
-								</Tooltip>
-							</div>
-						</ClickAwayListener>
+						<div>
+							<Tooltip
+								PopperProps={{
+									disablePortal: true,
+								}}
+								onClose={handleTooltipClose}
+								open={open}
+								disableFocusListener
+								disableTouchListener
+								title="Selecciona sin repetir para ganar">
+								<HelpIcon
+									onClick={handleTooltipOpen}
+									color="white"
+									style={{ cursor: 'pointer' }}
+								/>
+							</Tooltip>
+						</div>
+					</ClickAwayListener>
+
 					<Toolbar>
 						<Typography
 							marginLeft={'auto'}

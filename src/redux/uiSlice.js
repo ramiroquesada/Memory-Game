@@ -4,7 +4,8 @@ export const uiSlice = createSlice({
 	name: 'ui',
 	initialState: {
 		isModalOpen: false,
-		msg: null
+		msg: null,
+		lastView: 'game1'
 	},
 
 	reducers: {
