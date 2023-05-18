@@ -33,18 +33,22 @@ html{
 
 .pjCard{
 	cursor: pointer;
-	transition-duration: 300ms;
+
 }
 
-.pjCard:hover{
+.pjCard:not(.flipped):hover{
 	transform:scale(1.1);
+	-webkit-transform:scale(1.1);
 	-moz-transform:scale(1.1);
 	-ms-transform:scale(1.1);
 	-o-transform:scale(1.1);
-	-webkit-transform:scale(1.1);
-	box-shadow: blue 2px 2px 10px;
+	box-shadow: white 2px 2px 10px;
+	transition: transform ease-in-out 200ms;
+	-webkit-transition: transform ease-in-out 200ms;
+	-moz-transition: transform ease-in-out 200ms;
+	-ms-transition: transform ease-in-out 200ms;
+	-o-transition: transform ease-in-out 200ms;
 }
-
 
 .ReactModalPortal > div{
 	opacity: 0;
@@ -89,4 +93,46 @@ html{
 
 .record{
 	color: rgb(64, 221, 64);
+}
+
+
+
+/******************************************/
+
+.pjCard {
+  position: relative;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.pjCard.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+	background-color: transparent;
+
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  /* Estilos adicionales para la parte de atrás de la tarjeta */
+}
+
+.pjCard.flipped {
+	user-select: none;
+	cursor: default;
+
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { PsychologyOutlined } from '@mui/icons-material';
+import  PsychologyOutlined  from '@mui/icons-material/PsychologyOutlined';
 import HelpIcon from '@mui/icons-material/Help';
 import {
 	AppBar,

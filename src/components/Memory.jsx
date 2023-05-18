@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 import { Container, Grid } from '@mui/material';
-import { GameCard } from './GameCard';
 import { useUiStore } from '../hooks/useUiStore';
+import { MemoryCard } from './MemoryCard';
 
 export const Memory = () => {
 
 
 	const { isModalOpen } = useUiStore();
 
-	const { gameCards, allCards, startGettingCards, isWin } = useMemoryStore();
+	const { gameCards, allCards, allPlayerCards, backCard, startGettingCards, isWin } = useMemoryStore();
 
 	const [isData, setIsData] = useState(allCards.length > 0 || false);
 
@@ -21,7 +21,7 @@ export const Memory = () => {
 
 	return (
 		<Container
-			// maxWidth="xl"
+			maxWidth="md"
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
@@ -29,19 +29,20 @@ export const Memory = () => {
 			}}>
 			<Grid
 				container
-				// justifyContent={'center'}
+				justifyContent={'center'}
 				alignItems={'center'}
 				spacing={1}
 				>
-				{gameCards.map((card) => (
+				{gameCards?.map((card) => (
 					<Grid
 						justifyContent={'center'}
 						alignItems={'center'}
 						item
 						key={card.uuid}
-						
+						xs={3}
+						sx={{backgroundColor: 'transparent'}}
 						>
-						<GameCard data={card}></GameCard>
+						<MemoryCard data={card} />
 					</Grid>
 				))}
 			</Grid>
