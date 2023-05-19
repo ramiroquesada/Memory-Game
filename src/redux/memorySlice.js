@@ -14,7 +14,6 @@ export const memorySlice = createSlice({
 		flipCount: 0,
 		record: null,
 		isWin: false,
-		
 	},
 
 	reducers: {
