@@ -6,6 +6,7 @@ import {
 	onSetBackcard,
 	onSetGameCards,
 	onFlipClickedCard,
+	
 	onCheckClickedCardsMatch,
 } from '../redux/memorySlice';
 
@@ -18,7 +19,7 @@ import {
 export const useMemoryStore = () => {
 	const dispatch = useDispatch();
 
-	const { allCards, gameCards, allPlayerCards, backCard, clickedCards } = useSelector(
+	const { allCards, gameCards, matchedCards, allPlayerCards, backCard, clickedCards, flipCount  } = useSelector(
 		(state) => state.memory
 	);
 
@@ -55,12 +56,18 @@ export const useMemoryStore = () => {
 	const startClickCard = (card) => {
 		if (card.flipped) {return;}
 		else{
+
+
 			dispatch(onFlipClickedCard(card));
 
 			setTimeout(() => {
 				
 				dispatch( onCheckClickedCardsMatch())
-			}, 3000);
+			}, 2000);
+			
+			
+			
+			
 		}
 	};
 
@@ -72,6 +79,8 @@ export const useMemoryStore = () => {
 		allPlayerCards,
 		backCard,
 		clickedCards,
+		matchedCards,
+		flipCount,
 
 		startGettingCards,
 		startClickCard,

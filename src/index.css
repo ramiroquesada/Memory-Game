@@ -136,3 +136,8 @@ html{
 	cursor: default;
 
 }
+
+.matchedCard{
+	border-color: green;
+	border-width: 2px;
+}

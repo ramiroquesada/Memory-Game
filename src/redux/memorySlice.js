@@ -11,8 +11,10 @@ export const memorySlice = createSlice({
 		matchedCards: [],
 		clickedCards: [],
 		gameOver: false,
+		flipCount: 0,
 		record: null,
 		isWin: false,
+		
 	},
 
 	reducers: {
@@ -58,6 +60,8 @@ export const memorySlice = createSlice({
 		},
 
 		onFlipClickedCard: (state, { payload }) => {
+			
+						
 			const updatedGameCards = state.gameCards.map((card) => {
 				if (card.uuid === payload.uuid) {
 					state.clickedCards.push({
@@ -73,17 +77,20 @@ export const memorySlice = createSlice({
 				}
 			});
 
+			state.flipCount = state.flipCount + 1;
 			state.gameCards = updatedGameCards;
+			
 		},
 
 		onCheckClickedCardsMatch: (state) => {
 			if (state.clickedCards.length === 2) {
 				const [card1, card2] = state.clickedCards;
-
+				
 				if (card1.displayName === card2.displayName) {
 					state.matchedCards.push(card1, card2);
+					state.clickedCards = [];
+
 				} else {
-					// Voltear las cartas después de 2 segundos
 
 					const newGameCards = state.gameCards.map((card) => {
 						if (
@@ -108,7 +115,9 @@ export const memorySlice = createSlice({
 				state.clickedCards = [];
 			}
 		},
+		
 	},
+
 });
 
 export const {
@@ -118,4 +127,5 @@ export const {
 	onSetBackcard,
 	onFlipClickedCard,
 	onCheckClickedCardsMatch,
+	
 } = memorySlice.actions;

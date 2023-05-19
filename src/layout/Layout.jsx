@@ -12,11 +12,13 @@ import {
 	createTheme,
 } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
+import { useMemoryStore } from '../hooks/useMemoryStore';
 
 const theme = createTheme();
 
 export const Layout = ({ children }) => {
 	const { clickedCards, record, onNewRecord } = useGameStore();
+	const { flipCount } = useMemoryStore()
 
 	const [open, setOpen] = useState(false);
 
@@ -80,6 +82,8 @@ export const Layout = ({ children }) => {
 							textAlign={'right'}
 							marginRight={'1rem'}>
 							Puntaje: {clickedCards.length}
+							<br />
+							{flipCount}
 							<br />
 							Record: <strong className="record">{record}</strong>
 						</Typography>

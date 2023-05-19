@@ -8,6 +8,7 @@ export const MemoryCard = ({ data }) => {
 		backCard,
 		startClickCard,
 		clickedCards,
+		matchedCards,
 	} = useMemoryStore();
 
 
@@ -15,21 +16,29 @@ export const MemoryCard = ({ data }) => {
 	
   const isFlipped = gameCards.some((card) => card.uuid === data.uuid && card.flipped);
   const isClicked = clickedCards.some((card) => card.uuid === data.uuid);
+	const isMatched = matchedCards.some((card) => card.uuid === data.uuid && card.flipped)
 
 	const onClickCard = () => {
-		startClickCard(data);
+		if(clickedCards.length < 2){
+
+			startClickCard(data);
+		}
+		else{
+			return
+		}
 	};
 
 	return (
 		<Card
+
 			onClick={onClickCard}
 			key={data}
 			className={`pjCardMemory pjCard ${isFlipped || isClicked ? 'flipped' : ''}`}
 			style={{
-				maxHeight: '8rem',
 				aspectRatio: '1/1',
 				backgroundColor: 'transparent',
 				border: '1px solid #FFF',
+				maxHeight: '8rem',
 			}}>
 			<div className="card-inner">
 				<div className="card-front">
@@ -45,7 +54,7 @@ export const MemoryCard = ({ data }) => {
 						component="img"
 						image={data.displayIcon}
 						alt={data.displayName}
-						className="imgcard"
+						className={`imgcard `}
 						sx={{ backgroundColor: 'transparent' }}
 					/>
 				</div>
