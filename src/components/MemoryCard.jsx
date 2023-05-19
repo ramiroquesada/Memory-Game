@@ -3,44 +3,29 @@ import { Card, CardMedia } from '@mui/material';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 
 export const MemoryCard = ({ data }) => {
+	const {
+		gameCards,
+		backCard,
+		startClickCard,
+		clickedCards,
+	} = useMemoryStore();
+
+
 
 	
-	
-	const [flipped, setFlipped] = useState(false);
-	const { gameCards, allCards, allPlayerCards, backCard, startGettingCards, isWin, startClickCard, clickedCard} = useMemoryStore();
-
+  const isFlipped = gameCards.some((card) => card.uuid === data.uuid && card.flipped);
+  const isClicked = clickedCards.some((card) => card.uuid === data.uuid);
 
 	const onClickCard = () => {
 		startClickCard(data);
-		if(!data.clicked){
-			setFlipped(true)
-		}else{
-			setFlipped(false)
-		}
 	};
-
-	// useEffect(() => {
-
-	// 	if(!data.clicked){
-	// 		setFlipped(true)
-	// 	}else{
-	// 		setFlipped(false)
-	// 	}
-	
-	
-	// }, [])
-	
-
-
 
 	return (
 		<Card
-			onClick={ onClickCard}
+			onClick={onClickCard}
 			key={data}
-			// className="pjCardMemory pjCard"
-			className={`pjCardMemory pjCard ${flipped ? 'flipped' : ''}`}
+			className={`pjCardMemory pjCard ${isFlipped || isClicked ? 'flipped' : ''}`}
 			style={{
-				// maxWidth: '8rem',
 				maxHeight: '8rem',
 				aspectRatio: '1/1',
 				backgroundColor: 'transparent',
@@ -56,21 +41,15 @@ export const MemoryCard = ({ data }) => {
 					/>
 				</div>
 				<div className="card-back">
-				<CardMedia
+					<CardMedia
 						component="img"
 						image={data.displayIcon}
 						alt={data.displayName}
 						className="imgcard"
-						sx={{backgroundColor: 'transparent'}}
+						sx={{ backgroundColor: 'transparent' }}
 					/>
 				</div>
 			</div>
-			{/* <CardMedia
-				component="img"
-				image={data.displayIcon}
-				alt={data.displayName}
-				className="imgcard"
-			/> */}
 		</Card>
 	);
 };

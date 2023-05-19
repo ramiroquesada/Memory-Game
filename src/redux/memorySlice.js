@@ -9,7 +9,7 @@ export const memorySlice = createSlice({
 		backCard: [],
 		gameCards: [],
 		matchedCards: [],
-		clickedCard: [],
+		clickedCards: [],
 		gameOver: false,
 		record: null,
 		isWin: false,
@@ -36,7 +36,7 @@ export const memorySlice = createSlice({
 			state.isWin = false;
 
 			state.matchedCards = [];
-			state.clickedCard = [];
+			state.clickedCards = [];
 
 			const newArray = [...state.allCards]
 				?.sort(() => Math.random() - 0.5)
@@ -57,47 +57,55 @@ export const memorySlice = createSlice({
 			state.gameOver = false;
 		},
 
-		onClickCard: (state, { payload }) => {
-			if (state.clickedCard.length === 2) {
-				const newGameCards = state.gameCards.map((card) => {
-					if (card.flipped && state.matchedCards.includes(card)) {
-						console.log('2');
-						return card;
-					} else {
-						return {
-							...card,
-							flipped: false,
-						};
-					}
-				});
-				state.clickedCard = [];
-				state.gameCards = newGameCards;
-			} else if (
-				state.clickedCard.length === 1 &&
-				state.clickedCard[0].displayName === payload.displayName
-			) {
-				state.matchedCards.push(...state.clickedCard[0], {
-					...payload,
-					flipped: true,
-				});
-			} else {
-				const newCards = state.gameCards.map((card) => {
-					if (card.uuid != payload.uuid) {
-						return card;
-					} else {
-						return {
-							...card,
-							flipped: true,
-						};
-					}
-				});
+		onFlipClickedCard: (state, { payload }) => {
+			const updatedGameCards = state.gameCards.map((card) => {
+				if (card.uuid === payload.uuid) {
+					state.clickedCards.push({
+						...card,
+						flipped: true,
+					});
+					return {
+						...card,
+						flipped: true,
+					};
+				} else {
+					return card;
+				}
+			});
 
-				state.clickedCard.push({
-					...payload,
-					flipped: true,
-				});
+			state.gameCards = updatedGameCards;
+		},
 
-				state.gameCards = newCards;
+		onCheckClickedCardsMatch: (state) => {
+			if (state.clickedCards.length === 2) {
+				const [card1, card2] = state.clickedCards;
+
+				if (card1.displayName === card2.displayName) {
+					state.matchedCards.push(card1, card2);
+				} else {
+					// Voltear las cartas después de 2 segundos
+
+					const newGameCards = state.gameCards.map((card) => {
+						if (
+							card.uuid === card1.uuid ||
+							card.uuid === card2.uuid
+						) {
+							return {
+								...card,
+								flipped: false,
+							};
+						}
+						return card;
+					});
+
+					
+						state.gameCards = newGameCards;
+						state.clickedCards = [];
+						
+					
+				}
+
+				state.clickedCards = [];
 			}
 		},
 	},
@@ -108,5 +116,6 @@ export const {
 	onSetGameCards,
 	onSetAllPlayerCards,
 	onSetBackcard,
-	onClickCard,
+	onFlipClickedCard,
+	onCheckClickedCardsMatch,
 } = memorySlice.actions;

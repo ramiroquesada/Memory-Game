@@ -9,7 +9,7 @@ export const Memory = () => {
 
 	const { isModalOpen } = useUiStore();
 
-	const { gameCards, allCards, allPlayerCards, backCard, startGettingCards, isWin } = useMemoryStore();
+	const { gameCards, allCards, startGettingCards, isWin } = useMemoryStore();
 
 	const [isData, setIsData] = useState(allCards.length > 0 || false);
 
