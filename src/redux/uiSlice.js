@@ -4,7 +4,8 @@ export const uiSlice = createSlice({
 	name: 'ui',
 	initialState: {
 		isModalOpen: false,
-		msg: null
+		msg: null,
+		gameMode: null,
 	},
 
 	reducers: {
@@ -21,9 +22,19 @@ export const uiSlice = createSlice({
 			state.isModalOpen = false;
 			state.msg = null;
 		},
+
+		onSetGameMode: (state, {payload}) => {
+			state.gameMode = payload;
+			state.isModalOpen = false;
+
+		},
+
+		onOpenModalSelectGameMode: (state) => {
+			state.isModalOpen = true;
+		},
 		
 
 	},
 })
 
-export const { onOpenModalWin, onOpenModalLose, onCloseModal, msg, isModalOpen } = uiSlice.actions
+export const { onOpenModalWin, onOpenModalLose, onCloseModal, onSetGameMode, onOpenModalSelectGameMode } = uiSlice.actions

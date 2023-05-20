@@ -21,6 +21,26 @@ export const valoApi = async () => {
 
 		return agents;
 	} catch (error) {
-		console.log(error);
+		throw new Error(error)
+	}
+};
+
+export const playerCardsApi = async () => {
+	try {
+		const resp = await fetch('https://valorant-api.com/v1/playercards');
+
+		const { data } = await resp.json();
+
+		const cards = data			
+			.map((objeto) => {
+				return {
+					uuid: objeto.uuid,
+					displayIcon: objeto.displayIcon,
+				};
+			});
+
+		return cards;
+	} catch (error) {
+		throw new Error(error)
 	}
 };

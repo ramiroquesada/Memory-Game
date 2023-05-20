@@ -1,8 +1,10 @@
-import Modal from 'react-modal';
-import { Button } from '@mui/material';
+import { useState } from 'react';
 import { useUiStore } from '../hooks/useUiStore';
-import { useGameStore } from '../hooks/useGameStore';
+import Modal from 'react-modal';
 import JSConfetti from 'js-confetti';
+import { Button, Typography } from '@mui/material';
+import { useGameStore } from '../hooks/useGameStore';
+import { useMemoryStore } from '../hooks/useMemoryStore';
 
 const customStyles = {
 	content: {
@@ -16,18 +18,38 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const UiModal = () => {
-	const { isModalOpen, msg } = useUiStore();
-	const { onNewGame, isWin } = useGameStore();
+	const { isModalOpen, msg, gameMode, changeGameMode } = useUiStore();
+	const { onNewGame, isWin, gameOver } = useGameStore();
+
+	const { isWin : isMemoryWin, onNewMemoryGame } = useMemoryStore()
+
+	const [gameModeNull, setGameModeNull] = useState(
+		gameMode === null ? true : false
+	);
 
 	const onRestartGame = () => {
-		onNewGame();
+		if(gameOver){
+			onNewGame();
+		}else if (isMemoryWin){
+			onNewMemoryGame();
+		}
 	};
 
-	if (isWin) {
+	if (isWin || isMemoryWin) {
 		const jsConfetti = new JSConfetti();
 
 		jsConfetti.addConfetti();
 	}
+
+	const selectGamemode1 = () => {
+		changeGameMode(1)
+	}
+
+	const selectGamemode2 = () => {
+		changeGameMode(2)
+
+	}
+
 
 	return (
 		<Modal
@@ -36,12 +58,33 @@ export const UiModal = () => {
 			className="modal"
 			overlayClassName="modal-fondo"
 			closeTimeoutMS={200}>
-			<div className="modalContainer">
-				<h2>{msg}</h2>
-				<Button variant="contained" onClick={onRestartGame}>
-					Jugar de nuevo
-				</Button>
-			</div>
+			{gameModeNull ? (
+				<div className="modalContainer">
+					<h2>Elige un Modo de Juego</h2>
+					<div className='selectGameModeButtonsContainer'>
+						<div>
+						<Typography variant='body1'>Selecciona sin repetir</Typography>
+						<Button variant="contained" onClick={selectGamemode1}>
+							Jugar
+						</Button>
+						</div>
+						<div>
+						<Typography variant='body1'>Encuentra las parejas</Typography>
+						<Button variant="contained" onClick={selectGamemode2}>
+							Jugar
+						</Button>
+						</div>
+					</div>
+				
+				</div>
+			) : (
+				<div className="modalContainer">
+					<h2>{msg}</h2>
+					<Button variant="contained" onClick={onRestartGame}>
+						Jugar de nuevo
+					</Button>
+				</div>
+			)}
 		</Modal>
 	);
 };
