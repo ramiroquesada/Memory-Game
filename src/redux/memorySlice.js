@@ -43,7 +43,7 @@ export const memorySlice = createSlice({
 
 			const newArray = [...state.allCards]
 				?.sort(() => Math.random() - 0.5)
-				.slice(0, 2); //////////////////////////////////////10 EN VEZ DE 2
+				.slice(0, 10); //////////////////////////////////////10 EN VEZ DE 2
 
 			const newArray2 = [...newArray, ...newArray];
 
@@ -61,8 +61,6 @@ export const memorySlice = createSlice({
 		},
 
 		onFlipClickedCard: (state, { payload }) => {
-			
-						
 			const updatedGameCards = state.gameCards.map((card) => {
 				if (card.uuid === payload.uuid) {
 					state.clickedCards.push({
@@ -79,26 +77,41 @@ export const memorySlice = createSlice({
 			});
 
 			state.flipCount = state.flipCount + 1;
-			
-		
-			state.gameCards = updatedGameCards;
 
-			
+			state.gameCards = updatedGameCards;
 		},
 
-		onCheckClickedCardsMatch: (state) => {
+		onCheckClickedCardsMatchTrue: (state) => {
 			if (state.clickedCards.length === 2) {
 				const [card1, card2] = state.clickedCards;
-				
+
 				if (card1.displayName === card2.displayName) {
 					state.matchedCards.push(card1, card2);
+
+					const updatedGameCards = state.gameCards.map((card) => {
+						if (
+							card.uuid === card1.uuid ||
+							card.uuid === card2.uuid
+						) {
+							return {
+								...card,
+								flipped: true,
+							};
+						}
+						return card;
+					});
+
+					state.gameCards = updatedGameCards;
 					state.clickedCards = [];
+				}
+			}
+		},
+		onCheckClickedCardsMatchFalse: (state) => {
+			if (state.clickedCards.length === 2) {
+				const [card1, card2] = state.clickedCards;
 
-					
-
-				} else {
-
-					const newGameCards = state.gameCards.map((card) => {
+				if (card1.displayName !== card2.displayName) {
+					const resetGameCards = state.gameCards.map((card) => {
 						if (
 							card.uuid === card1.uuid ||
 							card.uuid === card2.uuid
@@ -111,19 +124,9 @@ export const memorySlice = createSlice({
 						return card;
 					});
 
-					
-						state.gameCards = newGameCards;
-						state.clickedCards = [];
-						
-					
+					state.gameCards = resetGameCards;
+					state.clickedCards = [];
 				}
-
-				if ( state.gameCards.length === state.matchedCards.length  ){
-					state.isPlaying = false;
-					state.isWin = true;
-			}
-
-				state.clickedCards = [];
 			}
 		},
 
@@ -131,9 +134,11 @@ export const memorySlice = createSlice({
 			state.isPlaying = true;
 		},
 
-		
+		onCheckWin: (state) => {
+			state.isWin = true;
+			state.isPlaying = false;
+		},
 	},
-
 });
 
 export const {
@@ -142,8 +147,8 @@ export const {
 	onSetAllPlayerCards,
 	onSetBackcard,
 	onFlipClickedCard,
-	onCheckClickedCardsMatch,
+	onCheckClickedCardsMatchTrue,
+	onCheckClickedCardsMatchFalse,
 	onStartTimer,
-
-	
+	onCheckWin,
 } = memorySlice.actions;

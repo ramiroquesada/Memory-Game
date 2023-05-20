@@ -11,7 +11,6 @@ export const useUiStore = () => {
 	
 
 	const openModalWin = () => {
-		console.log('modalwin')
 		dispatch( onOpenModalWin() )
 	}
 	const openModalLose = () => {

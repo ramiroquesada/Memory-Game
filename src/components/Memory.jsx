@@ -6,7 +6,7 @@ import { useMemoryStore } from '../hooks/useMemoryStore';
 import { useUiStore } from '../hooks/useUiStore';
 
 export const Memory = () => {
-	const { isModalOpen } = useUiStore();
+	const { isModalOpen, openModalWin } = useUiStore();
 
 	const { gameCards, allCards, startGettingCards, isWin } = useMemoryStore();
 
@@ -16,6 +16,12 @@ export const Memory = () => {
 		startGettingCards();
 	}, [isData]);
 
+	useEffect(() => {
+		if (isWin) {
+			openModalWin();
+		}
+	}, [isWin]);
+
 	return (
 		<Container
 			maxWidth="md"
@@ -24,12 +30,7 @@ export const Memory = () => {
 				justifyContent: 'center',
 				minHeight: 'calc(100dvh - 5rem)',
 				paddingTop: '1rem',
-				
 			}}>
-			
-				
-			
-
 			<Grid
 				container
 				justifyContent={'center'}
@@ -47,7 +48,7 @@ export const Memory = () => {
 					</Grid>
 				))}
 			</Grid>
-			{isModalOpen && <UiModal data={isWin}/>}
+			{isModalOpen && <UiModal data={isWin} />}
 		</Container>
 	);
 };

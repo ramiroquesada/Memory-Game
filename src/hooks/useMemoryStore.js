@@ -6,23 +6,27 @@ import {
 	onSetBackcard,
 	onSetGameCards,
 	onFlipClickedCard,
-	onCheckClickedCardsMatch,
 	onStartTimer,
+	onCheckWin,
+	onCheckClickedCardsMatchTrue,
+	onCheckClickedCardsMatchFalse,
 } from '../redux/memorySlice';
-import {
-	onOpenModalWin,
-} from '../redux/uiSlice';
-
-
+import { onCloseModal } from '../redux/uiSlice';
 
 export const useMemoryStore = () => {
-
-
 	const dispatch = useDispatch();
 
-	const { allCards, gameCards, matchedCards, allPlayerCards, backCard, clickedCards, flipCount, isPlaying, isWin  } = useSelector(
-		(state) => state.memory
-	);
+	const {
+		allCards,
+		gameCards,
+		matchedCards,
+		allPlayerCards,
+		backCard,
+		clickedCards,
+		flipCount,
+		isPlaying,
+		isWin,
+	} = useSelector((state) => state.memory);
 
 	const startGettingCards = async () => {
 		let localStorageCards = JSON.parse(localStorage.getItem('allCards'));
@@ -55,41 +59,42 @@ export const useMemoryStore = () => {
 	};
 
 	const startClickCard = (card) => {
-
-		
-		if (!isPlaying){
-			dispatch( onStartTimer() )
+		if (!isPlaying) {
+			dispatch(onStartTimer());
 		}
-		
+
 		if (card.flipped) {
 			return;
-		}
-		
-		else{
-			
-			
+		} else {
 			dispatch(onFlipClickedCard(card));
-			
-			setTimeout(() => {
-				
-				dispatch( onCheckClickedCardsMatch())
 
-				
+			const isWinner = () => {
+				return (
+					gameCards.length ===
+					matchedCards.length + 1 + clickedCards.length
+				);
+			};
 
-			}, 2000);
-			
-			if (isWin){
-				dispatch( onOpenModalWin() );
+			const win = isWinner();
+
+			if (win) {
+				dispatch(onCheckWin());
+				return;
 			}
-			
-			
-		}
 
-		
-		
+			dispatch(onCheckClickedCardsMatchTrue());
+
+			setTimeout(() => {
+				dispatch(onCheckClickedCardsMatchFalse());
+			}, 2000);
+		}
 	};
 
-	
+	const onNewMemoryGame = () => {
+		dispatch(onCloseModal());
+		dispatch(onSetGameCards());
+		dispatch(onSetBackcard());
+	};
 
 	return {
 		allCards,
@@ -104,5 +109,6 @@ export const useMemoryStore = () => {
 
 		startGettingCards,
 		startClickCard,
+		onNewMemoryGame,
 	};
 };

@@ -21,14 +21,19 @@ export const UiModal = () => {
 	const { isModalOpen, msg, gameMode, changeGameMode } = useUiStore();
 	const { onNewGame, isWin } = useGameStore();
 
-	const { isWin : isMemoryWin } = useMemoryStore()
+	const { isWin : isMemoryWin, onNewMemoryGame } = useMemoryStore()
 
 	const [gameModeNull, setGameModeNull] = useState(
 		gameMode === null ? true : false
 	);
 
 	const onRestartGame = () => {
-		onNewGame();
+		if(isWin){
+
+			onNewGame();
+		}else if (isMemoryWin){
+			onNewMemoryGame();
+		}
 	};
 
 	if (isWin || isMemoryWin) {

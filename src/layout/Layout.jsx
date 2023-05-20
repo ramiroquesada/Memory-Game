@@ -145,7 +145,7 @@ export const Layout = () => {
 									textAlign={'right'}>
 									Clicks: {flipCount}
 								</Typography>
-								<MyStopwatch />
+								<MyStopwatch data={flipCount} />
 							</div>
 						) : (
 							<Typography marginLeft={'auto'} textAlign={'right'}>
