@@ -29,7 +29,7 @@ export const useMemoryStore = () => {
 	} = useSelector((state) => state.memory);
 
 	const startGettingCards = async () => {
-		let localStorageCards = JSON.parse(localStorage.getItem('allCards'));
+		let localStorageCards = JSON.parse(localStorage.getItem('allCards1'));
 
 		let localStoragePlayerCards = JSON.parse(
 			localStorage.getItem('allPlayerCards')
@@ -44,7 +44,7 @@ export const useMemoryStore = () => {
 
 			dispatch(onSetAllPlayerCards(newPlayerCards));
 
-			localStorage.setItem('allCards', JSON.stringify(newCards));
+			localStorage.setItem('allCards1', JSON.stringify(newCards));
 			localStorage.setItem(
 				'allPlayerCards',
 				JSON.stringify(newPlayerCards)

@@ -22,14 +22,14 @@ export const useGameStore = () => {
 		useSelector((state) => state.game);
 
 	const startGettingCards = async () => {
-		let localStorageCards = JSON.parse(localStorage.getItem('allCards'));
+		let localStorageCards = JSON.parse(localStorage.getItem('allCards1'));
 
 		if (!localStorageCards) {
 			const newCards = await valoApi();
 
 			dispatch(onSetAllCards(newCards));
 
-			localStorage.setItem('allCards', JSON.stringify(newCards));
+			localStorage.setItem('allCards1', JSON.stringify(newCards));
 		} else {
 			dispatch(onSetAllCards(localStorageCards));
 		}
