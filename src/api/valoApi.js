@@ -21,7 +21,7 @@ export const valoApi = async () => {
 
 		return agents;
 	} catch (error) {
-		console.log(error);
+		throw new Error(error)
 	}
 };
 
@@ -41,6 +41,6 @@ export const playerCardsApi = async () => {
 
 		return cards;
 	} catch (error) {
-		console.log(error);
+		throw new Error(error)
 	}
 };

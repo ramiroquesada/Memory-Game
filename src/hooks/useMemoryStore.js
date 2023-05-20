@@ -63,9 +63,7 @@ export const useMemoryStore = () => {
 			dispatch(onStartTimer());
 		}
 
-		if (card.flipped) {
-			return;
-		} else {
+		if (!card.flipped) {
 			dispatch(onFlipClickedCard(card));
 
 			const isWinner = () => {
@@ -79,14 +77,19 @@ export const useMemoryStore = () => {
 
 			if (win) {
 				dispatch(onCheckWin());
-				return;
 			}
 
-			dispatch(onCheckClickedCardsMatchTrue());
-
-			setTimeout(() => {
-				dispatch(onCheckClickedCardsMatchFalse());
-			}, 2000);
+			if (clickedCards.length > 0) {
+				if (clickedCards[0]?.displayName === card.displayName) {
+					dispatch(onCheckClickedCardsMatchTrue());
+				} else {
+					setTimeout(() => {
+						dispatch(onCheckClickedCardsMatchFalse());
+					}, 1250);
+				}
+			}
+		} else {
+			return;
 		}
 	};
 

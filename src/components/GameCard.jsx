@@ -4,7 +4,6 @@ import { useGameStore } from '../hooks/useGameStore';
 export const GameCard = ({ data }) => {
 	const { onAddToClicked } = useGameStore();
 
-
 	const onClickCard = () => {
 		onAddToClicked(data);
 	};
@@ -14,14 +13,13 @@ export const GameCard = ({ data }) => {
 			onClick={onClickCard}
 			key={data}
 			className="pjCard gameCard2"
-			style={{
-				height: '100%',
-				width: '100%',
-				maxWidth: '8rem',
-				maxHeight: '8rem',
+			sx={{
+				aspectRatio: '1/1',
+
 				border: '1px solid #FFF',
+				maxHeight: '9rem',
+				backgroundColor: 'transparent',
 			}}
-			sx={{backgroundColor: 'transparent'}}
 			>
 			<CardMedia
 				component="img"

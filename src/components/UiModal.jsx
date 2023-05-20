@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useUiStore } from '../hooks/useUiStore';
 import Modal from 'react-modal';
+import JSConfetti from 'js-confetti';
 import { Button, Typography } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
-import JSConfetti from 'js-confetti';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 
 const customStyles = {
@@ -19,7 +19,7 @@ Modal.setAppElement('#root');
 
 export const UiModal = () => {
 	const { isModalOpen, msg, gameMode, changeGameMode } = useUiStore();
-	const { onNewGame, isWin } = useGameStore();
+	const { onNewGame, isWin, gameOver } = useGameStore();
 
 	const { isWin : isMemoryWin, onNewMemoryGame } = useMemoryStore()
 
@@ -28,8 +28,7 @@ export const UiModal = () => {
 	);
 
 	const onRestartGame = () => {
-		if(isWin){
-
+		if(gameOver){
 			onNewGame();
 		}else if (isMemoryWin){
 			onNewMemoryGame();
@@ -61,7 +60,7 @@ export const UiModal = () => {
 			closeTimeoutMS={200}>
 			{gameModeNull ? (
 				<div className="modalContainer">
-					<h2>Selecciona el Modo de Juego</h2>
+					<h2>Elige un Modo de Juego</h2>
 					<div className='selectGameModeButtonsContainer'>
 						<div>
 						<Typography variant='body1'>Selecciona sin repetir</Typography>

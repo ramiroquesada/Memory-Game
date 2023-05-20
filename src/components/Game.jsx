@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { UiModal } from './UiModal';
 import { Container, Grid } from '@mui/material';
+import { UiModal } from './UiModal';
 import { GameCard } from './GameCard';
 
 import { useGameStore } from '../hooks/useGameStore';
 import { useUiStore } from '../hooks/useUiStore';
-
 
 export const Game = () => {
 	const { isModalOpen } = useUiStore();
@@ -14,12 +13,9 @@ export const Game = () => {
 
 	const [isData, setIsData] = useState(allCards.length > 0 || false);
 
-
 	useEffect(() => {
 		startGettingCards();
 	}, [isData]);
-
-	
 
 	return (
 		<Container
@@ -41,12 +37,12 @@ export const Game = () => {
 						item
 						key={card.uuid}
 						xs={4}
-						sx={{backgroundColor: 'transparent'}}>
+						sx={{ backgroundColor: 'transparent' }}>
 						<GameCard data={card}></GameCard>
 					</Grid>
 				))}
 			</Grid>
-			{isModalOpen && <UiModal data={isWin}/>}
+			{isModalOpen && <UiModal />}
 		</Container>
 	);
 };

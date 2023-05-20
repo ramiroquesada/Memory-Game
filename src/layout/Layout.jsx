@@ -24,7 +24,7 @@ const theme = createTheme();
 
 export const Layout = () => {
 	const { gameMode, changeGameMode, isModalOpen, openModalSelectGameMode } =
-	useUiStore();
+		useUiStore();
 	const { clickedCards, record, onNewRecord } = useGameStore();
 	const { flipCount } = useMemoryStore();
 
@@ -136,16 +136,21 @@ export const Layout = () => {
 						</Toolbar>
 					</div>
 
-					
 					<Toolbar sx={{ width: '8rem' }}>
 						{gameMode === 2 ? (
-							<div style={{display: 'flex', flexDirection: 'column', marginLeft: 'auto', textAlign: 'right'}}>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									marginLeft: 'auto',
+									textAlign: 'right',
+								}}>
 								<Typography
 									marginLeft={'auto'}
 									textAlign={'right'}>
 									Clicks: {flipCount}
 								</Typography>
-								<MyStopwatch data={flipCount} />
+								<MyStopwatch />
 							</div>
 						) : (
 							<Typography marginLeft={'auto'} textAlign={'right'}>
@@ -159,9 +164,7 @@ export const Layout = () => {
 				</Toolbar>
 			</AppBar>
 
-			{
-				gameMode === 1 ? <Game /> : <Memory />
-			}
+			{gameMode === 1 ? <Game /> : <Memory />}
 
 			{isModalOpen && <UiModal />}
 		</ThemeProvider>

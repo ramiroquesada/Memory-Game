@@ -1,32 +1,32 @@
-*, *::before, *::after {
+/* *,
+*::before,
+*::after {
 	box-sizing: border-box;
-}
+} */
 
-body{
+body {
 	margin: 0;
 	padding: 0px;
 
 	width: 100dvw;
 	height: 100dvh;
-	background-color: #FF4656;
-
+	background-color: #ff4656;
 }
 
-html{
-	background-color: #FF4656;
-
+html {
+	background-color: #ff4656;
 }
 
-#root{
+#root {
 	height: 100dvh;
-	background-color: #FF4656;
-
+	background-color: #ff4656;
 }
 
-.modalContainer{
+.modalContainer {
 	display: flex;
 	flex-direction: column;
-	margin: 1.25rem;
+	margin: 1rem;
+	margin-bottom: 2rem;
 	gap: 1rem;
 }
 
@@ -36,34 +36,50 @@ html{
 	user-select: none;
 }
 
-
-.pjCard{
+.pjCard {
 	cursor: pointer;
 	background-color: transparent;
-
+	position: relative;
+	perspective: 1000px;
+	user-select: none;
 }
 
-.imgcard{
+.imgcard {
+	-webkit-user-drag: none;
 	background-color: transparent;
 }
 
+@media (hover: hover) and (pointer: fine) {
+	.gameCard2:hover {
+		box-shadow: white 3px 3px 25px;
+		transform: scale(1.06);
+		-webkit-transform: scale(1.06);
+		-moz-transform: scale(1.06);
+		-ms-transform: scale(1.06);
+		-o-transform: scale(1.06);
+		transition: all ease-out 200ms;
+		-webkit-transition: all ease-out 200ms;
+		-moz-transition: all ease-out 200ms;
+		-ms-transition: all ease-out 200ms;
+		-o-transition: all ease-out 200ms;
+	}
 
-
-.pjCard:not(.flipped):hover{
-	transform:scale(1.1);
-	-webkit-transform:scale(1.1);
-	-moz-transform:scale(1.1);
-	-ms-transform:scale(1.1);
-	-o-transform:scale(1.1);
-	box-shadow: white 2px 2px 10px;
-	transition: transform ease-in-out 200ms;
-	-webkit-transition: transform ease-in-out 200ms;
-	-moz-transition: transform ease-in-out 200ms;
-	-ms-transition: transform ease-in-out 200ms;
-	-o-transition: transform ease-in-out 200ms;
+	.pjCardMemory:not(.flipped):hover {
+		transform: scale(1.1);
+		-webkit-transform: scale(1.1);
+		-moz-transform: scale(1.1);
+		-ms-transform: scale(1.1);
+		-o-transform: scale(1.1);
+		box-shadow: white 3px 3px 25px;
+		transition: all ease-out 200ms;
+		-webkit-transition: all ease-out 200ms;
+		-moz-transition: all ease-out 200ms;
+		-ms-transition: all ease-out 200ms;
+		-o-transition: all ease-out 200ms;
+	}
 }
 
-.ReactModalPortal > div{
+.ReactModalPortal > div {
 	opacity: 0;
 }
 
@@ -71,7 +87,7 @@ html{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: opacity .2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
 	z-index: 999;
 }
 
@@ -100,69 +116,57 @@ html{
 	max-height: 620px;
 	max-width: 500px;
 	outline: none;
-	margin: 10px;
-	
+	margin: 1rem;
 }
 
-.record{
+.record {
 	color: rgb(64, 221, 64);
 }
 
-
-
 /******************************************/
 
-.pjCard {
-  position: relative;
-  perspective: 1000px;
-}
-
 .card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transition: transform 0.6s;
+	transform-style: preserve-3d;
 }
 
 .pjCard.flipped .card-inner {
-  transform: rotateY(180deg);
+	transform: rotateY(180deg);
 }
 
 .card-front,
 .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
 	background-color: transparent;
-
 }
 
 .card-back {
-  transform: rotateY(180deg);
-  /* Estilos adicionales para la parte de atrás de la tarjeta */
+	transform: rotateY(180deg);
+	/* Estilos adicionales para la parte de atrás de la tarjeta */
 }
 
-.pjCard.flipped {
+.pjCardMemory.flipped {
 	user-select: none;
 	cursor: default;
-
 }
 
-.matchedCard{
+.matchedCard {
 	border-color: green;
 	border-width: 2px;
 }
 
-.selectGameModeButtonsContainer{
+.selectGameModeButtonsContainer {
 	display: flex;
-	gap: 1rem;	
+	gap: 1rem;
 }
 
-
-
-.selectGameModeButtonsContainer > div{
+.selectGameModeButtonsContainer > div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -178,10 +182,9 @@ html{
 	max-width: 10rem;
 }
 
-
 .selectGameModeButtonsContainer > div:hover {
-	box-shadow: #FF4656 2px 2px 20px;
-	
+	box-shadow: #ff4656 2px 2px 20px;
+
 	transition: all 200ms ease-in-out;
 	-webkit-transition: all 200ms ease-in-out;
 	-moz-transition: all 200ms ease-in-out;
@@ -189,7 +192,7 @@ html{
 	-o-transition: all 200ms ease-in-out;
 }
 
-.selectGameModeButtonsContainer > div:hover > *{
+.selectGameModeButtonsContainer > div:hover > * {
 	font-weight: 900;
 	transform: scale(1.04);
 	-webkit-transform: scale(1.04);
@@ -203,7 +206,7 @@ html{
 	-o-transition: all 200ms ease-in-out;
 }
 
-.navMidToggle{
+.navMidToggle {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -214,7 +217,6 @@ html{
 	margin: 0;
 	margin-top: 0.5rem;
 	padding: 0;
-	
 }
 
 .navMidToggle > div {

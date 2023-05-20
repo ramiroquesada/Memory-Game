@@ -29,7 +29,7 @@ export const MemoryCard = ({ data }) => {
 				aspectRatio: '1/1',
 				backgroundColor: 'transparent',
 				border: '1px solid #FFF',
-				maxHeight: '8rem',
+				maxHeight: '9rem',
 			}}>
 			<div className="card-inner">
 				<div className="card-front">
@@ -45,7 +45,7 @@ export const MemoryCard = ({ data }) => {
 						component="img"
 						image={data.displayIcon}
 						alt={data.displayName}
-						className={`imgcard `}
+						className="imgcard"
 						sx={{ backgroundColor: 'transparent' }}
 					/>
 				</div>
