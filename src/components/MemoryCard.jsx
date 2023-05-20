@@ -27,9 +27,10 @@ export const MemoryCard = ({ data }) => {
 			}`}
 			style={{
 				aspectRatio: '1/1',
-				backgroundColor: 'transparent',
+				background: `linear-gradient(180deg, #${data.gradient.join(', #')})`,
 				border: '1px solid #FFF',
 				maxHeight: '9rem',
+				borderRadius: '0.75rem'
 			}}>
 			<div className="card-inner">
 				<div className="card-front">
@@ -46,7 +47,6 @@ export const MemoryCard = ({ data }) => {
 						image={data.displayIcon}
 						alt={data.displayName}
 						className="imgcard"
-						sx={{ backgroundColor: 'transparent' }}
 					/>
 				</div>
 			</div>

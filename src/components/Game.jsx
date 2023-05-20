@@ -29,7 +29,8 @@ export const Game = () => {
 				container
 				justifyContent={'center'}
 				alignItems={'center'}
-				spacing={2}>
+				spacing={1.5}
+				>
 				{gameCards.map((card) => (
 					<Grid
 						justifyContent={'center'}

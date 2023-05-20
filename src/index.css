@@ -25,15 +25,18 @@ html {
 .modalContainer {
 	display: flex;
 	flex-direction: column;
-	margin: 1rem;
+	margin: 0.2rem;
 	margin-bottom: 2rem;
-	gap: 1rem;
+	gap: 1.5rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
 }
 
 .modalContainer > h2 {
 	text-align: center;
-	text-shadow: #000000 3px 3px 40px;
+	text-shadow: #000000 0 0 50px;
 	user-select: none;
+	font-size: 1.3rem;
 }
 
 .pjCard {
@@ -47,6 +50,11 @@ html {
 .imgcard {
 	-webkit-user-drag: none;
 	background-color: transparent;
+	border-radius: 0.7rem;
+	-webkit-border-radius: 0.7rem;
+	-moz-border-radius: 0.7rem;
+	-ms-border-radius: 0.7rem;
+	-o-border-radius: 0.7rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -110,13 +118,17 @@ html {
 
 .modal {
 	background: white;
-	border-radius: 5px;
+	border-radius: 1rem;
 	color: rgb(44, 43, 43);
 	display: inline;
 	max-height: 620px;
 	max-width: 500px;
 	outline: none;
 	margin: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
 }
 
 .record {
@@ -163,7 +175,7 @@ html {
 
 .selectGameModeButtonsContainer {
 	display: flex;
-	gap: 1rem;
+	gap: 1.5rem;
 }
 
 .selectGameModeButtonsContainer > div {
@@ -172,7 +184,7 @@ html {
 	align-items: center;
 	text-align: center;
 	gap: 1rem;
-	box-shadow: #353031 2px 2px 20px;
+	box-shadow: #bbbbbb 2px 2px 20px;
 	padding: 1rem;
 	border-radius: 1rem;
 	-webkit-border-radius: 1rem;
@@ -182,9 +194,14 @@ html {
 	max-width: 10rem;
 }
 
-.selectGameModeButtonsContainer > div:hover {
-	box-shadow: #ff4656 2px 2px 20px;
+.selectGameModeButtonsContainer > :first-child:hover {
+	box-shadow: #ff465693 2px 2px 20px;
+}
+.selectGameModeButtonsContainer > :last-child:hover {
+	box-shadow: #0dd62e63 2px 2px 20px;
+}
 
+.selectGameModeButtonsContainer > div:hover {
 	transition: all 200ms ease-in-out;
 	-webkit-transition: all 200ms ease-in-out;
 	-moz-transition: all 200ms ease-in-out;
@@ -192,7 +209,7 @@ html {
 	-o-transition: all 200ms ease-in-out;
 }
 
-.selectGameModeButtonsContainer > div:hover > * {
+.selectGameModeButtonsContainer > div:hover > p {
 	font-weight: 900;
 	transform: scale(1.04);
 	-webkit-transform: scale(1.04);
@@ -210,17 +227,30 @@ html {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.25rem;
+	gap: 0.4rem;
+	font-size: 0.8rem;
 }
 
 .navMidToggle > p {
 	margin: 0;
 	margin-top: 0.5rem;
+
 	padding: 0;
 }
 
 .navMidToggle > div {
-	max-height: 25px;
 	margin-bottom: 0.5rem;
-	min-height: 20px;
+	max-height: 25px;
+	min-height: 18px;
+}
+
+
+.change{
+	font-size: 1.05rem;
+	color: #f0f0f0;
+	transition: all ease-in;
+	-webkit-transition: all ease-in;
+	-moz-transition: all ease-in;
+	-ms-transition: all ease-in;
+	-o-transition: all ease-in;
 }

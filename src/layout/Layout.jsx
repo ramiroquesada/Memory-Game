@@ -87,7 +87,7 @@ export const Layout = () => {
 
 					<div className="navMidToggle">
 						<p>Cambiar Modo</p>
-						<Toolbar sx={{ gap: '0.25rem' }}>
+						<Toolbar sx={{ gap: '0.75rem' }}>
 							<ClickAwayListener onClickAway={handleTooltipClose}>
 								<div>
 									<Tooltip
@@ -102,7 +102,10 @@ export const Layout = () => {
 										<HelpIcon
 											onClick={handleTooltipOpen}
 											color="white"
-											style={{ cursor: 'pointer' }}
+											style={{
+												cursor: 'pointer',
+												fontSize: '1.2rem',
+											}}
 										/>
 									</Tooltip>
 								</div>
@@ -112,6 +115,7 @@ export const Layout = () => {
 								onChange={handleSwitchChange}
 								inputProps={{ 'aria-label': 'controlled' }}
 								color="error"
+								size="small"
 							/>
 							<ClickAwayListener
 								onClickAway={handleRTooltipClose}>
@@ -128,7 +132,10 @@ export const Layout = () => {
 										<HelpIcon
 											onClick={handleRTooltipOpen}
 											color="white"
-											style={{ cursor: 'pointer' }}
+											style={{
+												cursor: 'pointer',
+												fontSize: '1.2rem',
+											}}
 										/>
 									</Tooltip>
 								</div>

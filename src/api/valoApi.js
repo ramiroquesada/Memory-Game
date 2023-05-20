@@ -16,6 +16,7 @@ export const valoApi = async () => {
 					uuid: objeto.uuid,
 					displayName: objeto.displayName,
 					displayIcon: objeto.displayIcon,
+					gradient: objeto.backgroundGradientColors
 				};
 			});
 

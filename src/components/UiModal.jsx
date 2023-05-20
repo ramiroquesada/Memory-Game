@@ -60,17 +60,17 @@ export const UiModal = () => {
 			closeTimeoutMS={200}>
 			{gameModeNull ? (
 				<div className="modalContainer">
-					<h2>Elige un Modo de Juego</h2>
+					<h2>ELIGE UN MODO DE JUEGO</h2>
 					<div className='selectGameModeButtonsContainer'>
 						<div>
 						<Typography variant='body1'>Selecciona sin repetir</Typography>
-						<Button variant="contained" onClick={selectGamemode1}>
+						<Button variant="contained" fullWidth onClick={selectGamemode1}>
 							Jugar
 						</Button>
 						</div>
 						<div>
 						<Typography variant='body1'>Encuentra las parejas</Typography>
-						<Button variant="contained" onClick={selectGamemode2}>
+						<Button variant="contained" fullWidth onClick={selectGamemode2}>
 							Jugar
 						</Button>
 						</div>

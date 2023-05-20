@@ -8,18 +8,19 @@ export const GameCard = ({ data }) => {
 		onAddToClicked(data);
 	};
 
+	
 	return (
 		<Card
 			onClick={onClickCard}
 			key={data}
 			className="pjCard gameCard2"
+			
 			sx={{
 				aspectRatio: '1/1',
-
 				border: '1px solid #FFF',
-				maxHeight: '9rem',
-				backgroundColor: 'transparent',
-			}}
+				borderRadius: '0.85rem',	
+				background: `linear-gradient(0deg, #${data.gradient.join(', #')})`			
+			}}			
 			>
 			<CardMedia
 				component="img"
