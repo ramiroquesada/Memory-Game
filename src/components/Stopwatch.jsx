@@ -3,7 +3,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 
 export default function MyStopwatch(data) {
-	const { seconds, minutes, hours, start, pause, reset } =
+	const { seconds, minutes, isRunning, start, pause, reset } =
 		useStopwatch({ autoStart: false });
 
 	const { isPlaying, isWin, flipCount } = useMemoryStore();
@@ -33,17 +33,17 @@ export default function MyStopwatch(data) {
 
 	useLayoutEffect(() => {
 		
-		if (seconds > 0){
+		if (isRunning){
 			setSecondClass(!secondClass)
 		}
 		
 	}, [seconds])
 
 	return (
-		<div style={{ textAlign: 'center' }}>
-			<p style={{ margin: '0', padding: '0.3rem' }}>
+		<div style={{ textAlign: 'center', height: '1.25rem', display: `${isRunning ? 'flex' : 'none'}`, alignItems: 'center', justifyContent: 'center' }}>
+			<p style={{ margin: '0', padding: '0'  }}>
 				{minutes > 0 && <span className={`seconds ${secondClass ? '' : 'change'}`}>{minutes} : </span>}
-				<span className={`seconds ${secondClass ? '' : 'change red'}`}>{seconds}</span>
+				<span className={`seconds ${secondClass ? '' : 'change'}`}>{seconds}</span>
 			</p>
 		</div>
 	);
