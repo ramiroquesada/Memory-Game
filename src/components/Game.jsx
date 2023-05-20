@@ -40,7 +40,8 @@ export const Game = () => {
 						alignItems={'center'}
 						item
 						key={card.uuid}
-						xs={4}>
+						xs={4}
+						sx={{backgroundColor: 'transparent'}}>
 						<GameCard data={card}></GameCard>
 					</Grid>
 				))}

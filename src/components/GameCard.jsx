@@ -13,13 +13,16 @@ export const GameCard = ({ data }) => {
 		<Card
 			onClick={onClickCard}
 			key={data}
-			className="pjCard"
+			className="pjCard gameCard2"
 			style={{
 				height: '100%',
 				width: '100%',
 				maxWidth: '8rem',
 				maxHeight: '8rem',
-			}}>
+				border: '1px solid #FFF',
+			}}
+			sx={{backgroundColor: 'transparent'}}
+			>
 			<CardMedia
 				component="img"
 				image={data.displayIcon}

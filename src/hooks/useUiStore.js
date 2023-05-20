@@ -1,36 +1,25 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onCloseModal, onOpenModalLose, onOpenModalWin, onSetGameMode } from "../redux/uiSlice";
+import { onCloseModal, onOpenModalLose, onOpenModalSelectGameMode, onOpenModalWin, onSetGameMode } from "../redux/uiSlice";
 
 export const useUiStore = () => {
 
 	const dispatch = useDispatch();
+	const {isModalOpen, msg, gameMode} = useSelector(state => state.ui);
 
-	const {isModalOpen, msg, lastView, gameMode} = useSelector(state => state.ui);
 
 
-	const startGettingGameMode = () => {
-		let localStorageLastView = localStorage.getItem('lastView')
-
-		if (localStorageLastView == null) {
-			
-			dispatch(onSetGameMode(null));
-			localStorage.setItem('lastView', null);
-
-		}else{
-			dispatch(onSetGameMode(localStorageLastView));
-
-		}
-		
-		
-
-	};
 	
 
 	const openModalWin = () => {
+		console.log('modalwin')
 		dispatch( onOpenModalWin() )
 	}
 	const openModalLose = () => {
 		dispatch( onOpenModalLose() )
+	}
+
+	const openModalSelectGameMode = () => {
+		dispatch( onOpenModalSelectGameMode() )
 	}
 
 	const closeModal = () => {
@@ -38,24 +27,20 @@ export const useUiStore = () => {
 	}
 
 	const changeGameMode = (mode) => {
-		
-
-		
+			
 		dispatch( onSetGameMode(mode) );
-		localStorage.setItem('lastView', mode);
 	}
 
 	return {
 		isModalOpen,
 		msg,
 		gameMode,
-		lastView,
 
 		openModalWin,
 		openModalLose,
 		closeModal,
-		changeGameMode,
-		startGettingGameMode,
+		changeGameMode,		
+		openModalSelectGameMode,
 		
 	};
 };

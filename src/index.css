@@ -26,15 +26,28 @@ html{
 .modalContainer{
 	display: flex;
 	flex-direction: column;
-	margin: 2rem;
+	margin: 1.25rem;
 	gap: 1rem;
+}
+
+.modalContainer > h2 {
+	text-align: center;
+	text-shadow: #000000 3px 3px 40px;
+	user-select: none;
 }
 
 
 .pjCard{
 	cursor: pointer;
+	background-color: transparent;
 
 }
+
+.imgcard{
+	background-color: transparent;
+}
+
+
 
 .pjCard:not(.flipped):hover{
 	transform:scale(1.1);
@@ -87,7 +100,7 @@ html{
 	max-height: 620px;
 	max-width: 500px;
 	outline: none;
-	padding: 10px;
+	margin: 10px;
 	
 }
 
@@ -140,4 +153,72 @@ html{
 .matchedCard{
 	border-color: green;
 	border-width: 2px;
+}
+
+.selectGameModeButtonsContainer{
+	display: flex;
+	gap: 1rem;	
+}
+
+
+
+.selectGameModeButtonsContainer > div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+	box-shadow: #353031 2px 2px 20px;
+	padding: 1rem;
+	border-radius: 1rem;
+	-webkit-border-radius: 1rem;
+	-moz-border-radius: 1rem;
+	-ms-border-radius: 1rem;
+	-o-border-radius: 1rem;
+	max-width: 10rem;
+}
+
+
+.selectGameModeButtonsContainer > div:hover {
+	box-shadow: #FF4656 2px 2px 20px;
+	
+	transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+}
+
+.selectGameModeButtonsContainer > div:hover > *{
+	font-weight: 900;
+	transform: scale(1.04);
+	-webkit-transform: scale(1.04);
+	-moz-transform: scale(1.04);
+	-ms-transform: scale(1.04);
+	-o-transform: scale(1.04);
+	transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+}
+
+.navMidToggle{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.navMidToggle > p {
+	margin: 0;
+	margin-top: 0.5rem;
+	padding: 0;
+	
+}
+
+.navMidToggle > div {
+	max-height: 25px;
+	margin-bottom: 0.5rem;
+	min-height: 20px;
 }

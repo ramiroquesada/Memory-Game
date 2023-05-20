@@ -14,6 +14,7 @@ export const memorySlice = createSlice({
 		flipCount: 0,
 		record: null,
 		isWin: false,
+		isPlaying: false,
 	},
 
 	reducers: {
@@ -35,13 +36,14 @@ export const memorySlice = createSlice({
 
 		onSetGameCards: (state) => {
 			state.isWin = false;
-
+			state.isPlaying = false;
+			state.flipCount = 0;
 			state.matchedCards = [];
 			state.clickedCards = [];
 
 			const newArray = [...state.allCards]
 				?.sort(() => Math.random() - 0.5)
-				.slice(0, 10);
+				.slice(0, 2); //////////////////////////////////////10 EN VEZ DE 2
 
 			const newArray2 = [...newArray, ...newArray];
 
@@ -77,7 +79,10 @@ export const memorySlice = createSlice({
 			});
 
 			state.flipCount = state.flipCount + 1;
+			
+		
 			state.gameCards = updatedGameCards;
+
 			
 		},
 
@@ -88,6 +93,8 @@ export const memorySlice = createSlice({
 				if (card1.displayName === card2.displayName) {
 					state.matchedCards.push(card1, card2);
 					state.clickedCards = [];
+
+					
 
 				} else {
 
@@ -111,9 +118,19 @@ export const memorySlice = createSlice({
 					
 				}
 
+				if ( state.gameCards.length === state.matchedCards.length  ){
+					state.isPlaying = false;
+					state.isWin = true;
+			}
+
 				state.clickedCards = [];
 			}
 		},
+
+		onStartTimer: (state) => {
+			state.isPlaying = true;
+		},
+
 		
 	},
 
@@ -126,5 +143,7 @@ export const {
 	onSetBackcard,
 	onFlipClickedCard,
 	onCheckClickedCardsMatch,
+	onStartTimer,
+
 	
 } = memorySlice.actions;

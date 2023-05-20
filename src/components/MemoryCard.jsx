@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Card, CardMedia } from '@mui/material';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 
@@ -8,7 +7,6 @@ export const MemoryCard = ({ data }) => {
 		backCard,
 		startClickCard,
 		clickedCards,
-		matchedCards,
 	} = useMemoryStore();
 
 
@@ -16,7 +14,6 @@ export const MemoryCard = ({ data }) => {
 	
   const isFlipped = gameCards.some((card) => card.uuid === data.uuid && card.flipped);
   const isClicked = clickedCards.some((card) => card.uuid === data.uuid);
-	const isMatched = matchedCards.some((card) => card.uuid === data.uuid && card.flipped)
 
 	const onClickCard = () => {
 		if(clickedCards.length < 2){
@@ -39,7 +36,8 @@ export const MemoryCard = ({ data }) => {
 				backgroundColor: 'transparent',
 				border: '1px solid #FFF',
 				maxHeight: '8rem',
-			}}>
+			}}
+			>
 			<div className="card-inner">
 				<div className="card-front">
 					<CardMedia

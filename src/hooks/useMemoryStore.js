@@ -6,20 +6,21 @@ import {
 	onSetBackcard,
 	onSetGameCards,
 	onFlipClickedCard,
-	
 	onCheckClickedCardsMatch,
+	onStartTimer,
 } from '../redux/memorySlice';
+import {
+	onOpenModalWin,
+} from '../redux/uiSlice';
 
-// import {
-// 	onCloseModal,
-// 	onOpenModalWin,
-// 	onOpenModalLose,
-// } from '../redux/uiSlice';
+
 
 export const useMemoryStore = () => {
+
+
 	const dispatch = useDispatch();
 
-	const { allCards, gameCards, matchedCards, allPlayerCards, backCard, clickedCards, flipCount  } = useSelector(
+	const { allCards, gameCards, matchedCards, allPlayerCards, backCard, clickedCards, flipCount, isPlaying, isWin  } = useSelector(
 		(state) => state.memory
 	);
 
@@ -54,21 +55,38 @@ export const useMemoryStore = () => {
 	};
 
 	const startClickCard = (card) => {
-		if (card.flipped) {return;}
+
+		
+		if (!isPlaying){
+			dispatch( onStartTimer() )
+		}
+		
+		if (card.flipped) {
+			return;
+		}
+		
 		else{
-
-
+			
+			
 			dispatch(onFlipClickedCard(card));
-
+			
 			setTimeout(() => {
 				
 				dispatch( onCheckClickedCardsMatch())
+
+				
+
 			}, 2000);
 			
-			
+			if (isWin){
+				dispatch( onOpenModalWin() );
+			}
 			
 			
 		}
+
+		
+		
 	};
 
 	
@@ -81,6 +99,8 @@ export const useMemoryStore = () => {
 		clickedCards,
 		matchedCards,
 		flipCount,
+		isPlaying,
+		isWin,
 
 		startGettingCards,
 		startClickCard,
