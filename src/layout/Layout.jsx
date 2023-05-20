@@ -8,10 +8,12 @@ import {
 	CssBaseline,
 	Switch,
 	Toolbar,
-	Tooltip,
 	Typography,
+	IconButton,
 	createTheme,
+	Tooltip,
 } from '@mui/material';
+
 import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 import { useUiStore } from '../hooks/useUiStore';
@@ -21,6 +23,9 @@ import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
 
 const theme = createTheme();
+
+
+
 
 export const Layout = () => {
 	const { gameMode, changeGameMode, isModalOpen, openModalSelectGameMode } =
@@ -86,7 +91,7 @@ export const Layout = () => {
 					</Toolbar>
 
 					<div className="navMidToggle">
-						<p>Cambiar Modo</p>
+						<p>Modo</p>
 						<Toolbar sx={{ gap: '0.75rem' }}>
 							<ClickAwayListener onClickAway={handleTooltipClose}>
 								<div>
@@ -104,42 +109,45 @@ export const Layout = () => {
 											color="white"
 											style={{
 												cursor: 'pointer',
-												fontSize: '1.2rem',
+												fontSize: '1.4rem',
 											}}
 										/>
 									</Tooltip>
 								</div>
 							</ClickAwayListener>
+							
+
 							<Switch
 								checked={checked}
 								onChange={handleSwitchChange}
 								inputProps={{ 'aria-label': 'controlled' }}
 								color="error"
-								size="small"
+								size="medium"
 							/>
-							<ClickAwayListener
-								onClickAway={handleRTooltipClose}>
+							<ClickAwayListener onClickAway={handleRTooltipClose}>
 								<div>
+									
 									<Tooltip
 										PopperProps={{
-											disablePortal: true,
+											disablePortal: false,
 										}}
 										onClose={handleRTooltipClose}
 										open={openR}
 										disableFocusListener
 										disableTouchListener
-										title="Encuentra las parejas">
+										title="Encuentra las parejas"
+										>
 										<HelpIcon
 											onClick={handleRTooltipOpen}
 											color="white"
 											style={{
 												cursor: 'pointer',
-												fontSize: '1.2rem',
+												fontSize: '1.4rem',
 											}}
 										/>
 									</Tooltip>
 								</div>
-							</ClickAwayListener>
+								</ClickAwayListener>
 						</Toolbar>
 					</div>
 
@@ -155,7 +163,10 @@ export const Layout = () => {
 								<Typography
 									marginLeft={'auto'}
 									textAlign={'right'}>
-									Clicks: {flipCount}
+									Clicks:{' '}
+									<strong className="record">
+										{flipCount}
+									</strong>
 								</Typography>
 								<MyStopwatch />
 							</div>

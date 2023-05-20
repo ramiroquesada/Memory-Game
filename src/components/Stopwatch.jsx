@@ -40,7 +40,7 @@ export default function MyStopwatch(data) {
 	}, [seconds])
 
 	return (
-		<div style={{ textAlign: 'center', height: '1.25rem', display: `${isRunning ? 'flex' : 'none'}`, alignItems: 'center', justifyContent: 'center' }}>
+		<div style={{ textAlign: 'center', height: '1.25rem', display: `${seconds > 0 || minutes > 0 ? 'flex' : 'none'}`, alignItems: 'center', justifyContent: 'center' }}>
 			<p style={{ margin: '0', padding: '0'  }}>
 				{minutes > 0 && <span className={`seconds ${secondClass ? '' : 'change'}`}>{minutes} : </span>}
 				<span className={`seconds ${secondClass ? '' : 'change'}`}>{seconds}</span>
