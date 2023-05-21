@@ -84,15 +84,15 @@ export const Layout = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<AppBar position="relative" sx={{ maxHeight: '4rem' }}>
+			<AppBar position="relative" sx={{ minHeight: '5rem', justifyContent: 'center', background:'linear-gradient(0deg, #3c3a4c, #f94555)' }}>
 				<Toolbar sx={{ justifyContent: 'space-between', padding: 0 }}>
-					<Toolbar sx={{ width: '8rem' }}>
+					<Toolbar sx={{maxWidth: {xs:'9rem', md:'11rem'}}}>
 						<PsychologyOutlined sx={{ fontSize: '3rem' }} />
 					</Toolbar>
 
-					<div className="navMidToggle">
-						<p>Modo</p>
-						<Toolbar sx={{ gap: '0.75rem' }}>
+					<div className="navMidToggle" >
+						
+						<Toolbar sx={{ gap: {xs:'0', md:'1rem'}}}>
 							<ClickAwayListener onClickAway={handleTooltipClose}>
 								<div>
 									<Tooltip
@@ -107,9 +107,9 @@ export const Layout = () => {
 										<HelpIcon
 											onClick={handleTooltipOpen}
 											color="white"
-											style={{
+											sx={{
 												cursor: 'pointer',
-												fontSize: '1.4rem',
+												fontSize: {xs:'1.4rem', md:'2rem'},
 											}}
 										/>
 									</Tooltip>
@@ -120,9 +120,7 @@ export const Layout = () => {
 							<Switch
 								checked={checked}
 								onChange={handleSwitchChange}
-								inputProps={{ 'aria-label': 'controlled' }}
-								color="error"
-								size="medium"
+								color='default'
 							/>
 							<ClickAwayListener onClickAway={handleRTooltipClose}>
 								<div>
@@ -140,9 +138,9 @@ export const Layout = () => {
 										<HelpIcon
 											onClick={handleRTooltipOpen}
 											color="white"
-											style={{
+											sx={{
 												cursor: 'pointer',
-												fontSize: '1.4rem',
+												fontSize: {xs:'1.4rem', md:'2rem'},
 											}}
 										/>
 									</Tooltip>
@@ -151,17 +149,15 @@ export const Layout = () => {
 						</Toolbar>
 					</div>
 
-					<Toolbar sx={{ width: '8rem' }}>
+					<Toolbar sx={{ maxWidth: {xs:'7rem', md: '8rem'} }} style={{paddingRight:'1rem' ,paddingLeft:'0'}}>
 						{gameMode === 2 ? (
 							<div
 								style={{
 									display: 'flex',
 									flexDirection: 'column',
-									marginLeft: 'auto',
-									textAlign: 'right',
 								}}>
 								<Typography
-									marginLeft={'auto'}
+								fontSize={{xs:'1rem', md: '1.2rem'}}
 									textAlign={'right'}>
 									Clicks:{' '}
 									<strong className="record">
@@ -171,12 +167,18 @@ export const Layout = () => {
 								<MyStopwatch />
 							</div>
 						) : (
-							<Typography marginLeft={'auto'} textAlign={'right'}>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+								}}>
+							<Typography textAlign={'right'} fontSize={{xs:'0.85rem', md: '1.1rem'}} >
 								Puntaje: {clickedCards.length}
 								<br />
 								Record:{' '}
 								<strong className="record">{record}</strong>
 							</Typography>
+							</div>
 						)}
 					</Toolbar>
 				</Toolbar>

@@ -25,11 +25,13 @@ export const Memory = () => {
 	return (
 		<Container
 			maxWidth="md"
+
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
 				minHeight: 'calc(100dvh - 5rem)',
 				paddingTop: '1rem',
+				paddingBottom: '1rem',
 			}}>
 			<Grid
 				container
@@ -38,12 +40,13 @@ export const Memory = () => {
 				spacing={1}>
 				{gameCards?.map((card) => (
 					<Grid
+					// container
 						justifyContent={'center'}
 						alignItems={'center'}
-						item
+						item						
 						key={card.uuid}
 						xs={3}
-						sx={{ backgroundColor: 'transparent' }}>
+						sx={{ backgroundColor: 'transparent', placeContent: 'center' }}>
 						<MemoryCard data={card} />
 					</Grid>
 				))}
