@@ -24,23 +24,22 @@ export const Memory = () => {
 
 	return (
 		<Container
-			maxWidth="md"
-
+			maxWidth="lg"
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
 				minHeight: 'calc(100dvh - 5rem)',
-				paddingTop: '1rem',
-				paddingBottom: '1rem',
+				paddingBottom: '2rem',
+				paddingTop: '2rem'
 			}}>
 			<Grid
 				container
 				justifyContent={'center'}
 				alignItems={'center'}
-				spacing={1}>
+				spacing={2}
+				>
 				{gameCards?.map((card) => (
 					<Grid
-					// container
 						justifyContent={'center'}
 						alignItems={'center'}
 						item						

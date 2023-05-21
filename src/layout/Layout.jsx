@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import PsychologyOutlined from '@mui/icons-material/PsychologyOutlined';
-import HelpIcon from '@mui/icons-material/Help';
 import {
 	AppBar,
-	ClickAwayListener,
 	CssBaseline,
 	Switch,
 	Toolbar,
 	Typography,
 	createTheme,
-	Tooltip,
+	IconButton,
+	Backdrop,
+	styled,
+	Paper,
 } from '@mui/material';
 
 import { useGameStore } from '../hooks/useGameStore';
@@ -21,8 +22,19 @@ import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
 import { Cronometro } from '../components/Cronometro';
 
-const theme = createTheme();
+const theme = createTheme({ palette: { mode: 'light' } });
 
+const Item = styled(Paper)(({ theme }) => ({
+	...theme.typography.body1,
+	textAlign: 'center',
+	color: theme.palette.text.secondary,
+	paddingLeft: '2rem',
+	paddingRight: '2rem',
+	height: '8rem',
+	display: 'flex',
+	alignItems: 'center',
+	borderRadius: '1rem',
+}));
 
 export const Layout = () => {
 	const { gameMode, changeGameMode, isModalOpen, openModalSelectGameMode } =
@@ -31,7 +43,6 @@ export const Layout = () => {
 	const { flipCount } = useMemoryStore();
 
 	const [open, setOpen] = useState(false);
-	const [openR, setOpenR] = useState(false);
 
 	const [checked, setChecked] = useState(gameMode == 2 ? true : false);
 
@@ -39,27 +50,19 @@ export const Layout = () => {
 		if (!checked) {
 			changeGameMode(2);
 			setChecked(true);
+			setOpen(true);
+
 			return;
 		} else if (checked) {
 			changeGameMode(1);
 			setChecked(false);
+			setOpen(true);
 			return;
 		}
 	};
 
-	const handleTooltipClose = () => {
+	const handleClose = () => {
 		setOpen(false);
-	};
-
-	const handleTooltipOpen = () => {
-		setOpen(true);
-	};
-	const handleRTooltipClose = () => {
-		setOpenR(false);
-	};
-
-	const handleRTooltipOpen = () => {
-		setOpenR(true);
 	};
 
 	useEffect(() => {
@@ -81,80 +84,68 @@ export const Layout = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<AppBar position="relative" sx={{ minHeight: '5rem', justifyContent: 'center', background:'linear-gradient(0deg, #3c3a4c, #f94555)' }}>
+			<AppBar
+				position="relative"
+				sx={{
+					minHeight: '5rem',
+					justifyContent: 'center',
+					background: 'linear-gradient(0deg, #3c3a4c, #f94555)',
+				}}>
 				<Toolbar sx={{ justifyContent: 'space-between', padding: 0 }}>
-					<Toolbar sx={{width: {xs:'5rem', md:'6rem'}}} style={{paddingRight:'0' ,paddingLeft:'1rem'}}>
-						<PsychologyOutlined sx={{ fontSize: '3rem' }} />
+					<Toolbar
+						sx={{ width: { xs: '5.5rem', sm: '7rem', md: '8rem' } }}
+						style={{ paddingRight: '0', paddingLeft: '0rem' }}>
+						<IconButton color="white">
+							<PsychologyOutlined
+								sx={{ fontSize: '3rem', color: 'white' }}
+							/>
+						</IconButton>
 					</Toolbar>
 
-					<div className="navMidToggle" >
-						
-						<Toolbar sx={{ gap: {xs:'0', md:'1rem'}}}>
-							<ClickAwayListener onClickAway={handleTooltipClose}>
-								<div>
-									<Tooltip
-										PopperProps={{
-											disablePortal: true,
-										}}
-										onClose={handleTooltipClose}
-										open={open}
-										disableFocusListener
-										disableTouchListener
-										title="Selecciona sin repetir">
-										<HelpIcon
-											onClick={handleTooltipOpen}
-											color="white"
-											sx={{
-												cursor: 'pointer',
-												fontSize: {xs:'1.4rem', md:'2rem'},
-											}}
-										/>
-									</Tooltip>
-								</div>
-							</ClickAwayListener>
-							
-
-							<Switch
-								checked={checked}
-								onChange={handleSwitchChange}
-								color='default'
-							/>
-							<ClickAwayListener onClickAway={handleRTooltipClose}>
-								<div>
-									
-									<Tooltip
-										PopperProps={{
-											disablePortal: false,
-										}}
-										onClose={handleRTooltipClose}
-										open={openR}
-										disableFocusListener
-										disableTouchListener
-										title="Encuentra las parejas"
-										>
-										<HelpIcon
-											onClick={handleRTooltipOpen}
-											color="white"
-											sx={{
-												cursor: 'pointer',
-												fontSize: {xs:'1.4rem', md:'2rem'},
-											}}
-										/>
-									</Tooltip>
-								</div>
-								</ClickAwayListener>
-						</Toolbar>
+					<div
+						className="navMidToggle"
+						style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+						<Switch
+							checked={checked}
+							onChange={handleSwitchChange}
+							color="info"
+							value="Hola"
+						/>
+						<Backdrop
+							sx={{
+								color: '#fff',
+								zIndex: (theme) => theme.zIndex.drawer + 1,
+							}}
+							open={open}
+							onClick={handleClose}>
+							<Item elevation={24}>
+								<Typography
+									fontWeight={800}
+									fontSize={'1.25rem'}>
+									{checked
+										? 'Memoriza las posiciones'
+										: 'No repitas al mismo'}
+								</Typography>
+							</Item>
+						</Backdrop>
 					</div>
 
-					<Toolbar sx={{ width: {xs:'5rem', md: '10rem'} }} style={{marginRight:'1rem' ,paddingLeft:'0'}}>
+					<Toolbar
+						sx={{ width: { xs: '6rem', sm: '7rem', md: '9rem' } }}
+						style={{
+							paddingRight: '0',
+							paddingLeft: '0',
+							marginRight: '1rem',
+						}}>
 						{gameMode === 2 ? (
 							<div
 								style={{
 									display: 'flex',
 									flexDirection: 'column',
+									minWidth: '6rem',
 								}}>
 								<Typography
-								fontSize={{xs:'0.9rem', md: '1.2rem'}}
+									fontSize={{ xs: '1rem', sm: '1.2rem' }}
 									textAlign={'right'}>
 									Clicks:{' '}
 									<strong className="record">
@@ -168,13 +159,23 @@ export const Layout = () => {
 								style={{
 									display: 'flex',
 									flexDirection: 'column',
+									minWidth: '6rem',
 								}}>
-							<Typography marginLeft={'auto'} textAlign={'right'} fontSize={{xs:'0.77rem', md: '1.1rem'}} >
-								{clickedCards.length > 0 && <>Puntaje: {clickedCards.length} <br /></>}
-								
-								Record:{' '}
-								<strong className="record">{record}</strong>
-							</Typography>
+								<Typography
+									fontSize={{ xs: '1rem', sm: '1.2rem' }}
+									textAlign={'right'}>
+									{clickedCards.length > 0 && (
+										<>
+											Puntaje:{' '}
+											<strong>
+												{clickedCards.length}
+											</strong>
+											<br />
+										</>
+									)}
+									Record:{' '}
+									<strong className="record">{record}</strong>
+								</Typography>
 							</div>
 						)}
 					</Toolbar>

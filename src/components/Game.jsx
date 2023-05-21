@@ -19,20 +19,19 @@ export const Game = () => {
 
 	return (
 		<Container
-			maxWidth="sm"
+			maxWidth="lg"
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
 				minHeight: 'calc(100dvh - 5rem)',
-				// padding: '1rem'
-			}}
-			sx={{paddingRight: { md: '6rem'}}}>
+				paddingBottom: '2rem',
+				paddingTop: '2rem',
+			}}>
 			<Grid
 				container
 				justifyContent={'center'}
 				alignItems={'center'}
-				spacing={1.5}
-				>
+				spacing={2}>
 				{gameCards.map((card) => (
 					<Grid
 						justifyContent={'center'}
@@ -40,7 +39,7 @@ export const Game = () => {
 						item
 						key={card.uuid}
 						xs={4}
-						sx={{ backgroundColor: 'transparent' }}>
+						sx={{ backgroundColor: 'transparent', placeContent: 'center'  }}>
 						<GameCard data={card}></GameCard>
 					</Grid>
 				))}

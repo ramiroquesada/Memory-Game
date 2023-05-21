@@ -35,6 +35,8 @@ export const MemoryCard = ({ data }) => {
 				maxWidth: '9rem',
 				borderRadius: '0.75rem',
 				alignContent: 'center',
+				marginLeft: 'auto',
+				marginRight: 'auto'	
 			}}>
 			<div className="card-inner">
 				<div className="card-front">

@@ -115,55 +115,7 @@ export const memorySlice = createSlice({
 			state.gameCards = resetGameCards;
 			state.clickedCards = [];
 		},
-		// onCheckClickedCardsMatchTrue: (state) => {
-
-		// 		const [card1, card2] = state.clickedCards;
-
-		// 		if (card1.displayName === card2.displayName) {
-		// 			state.matchedCards.push(card1, card2);
-
-		// 			const updatedGameCards = state.gameCards.map((card) => {
-		// 				if (
-		// 					card.uuid === card1.uuid ||
-		// 					card.uuid === card2.uuid
-		// 				) {
-		// 					return {
-		// 						...card,
-		// 						flipped: true,
-		// 					};
-		// 				}
-		// 				return card;
-		// 			});
-
-		// 			state.gameCards = updatedGameCards;
-		// 			state.clickedCards = [];
-		// 		}
-
-		// },
-		// onCheckClickedCardsMatchFalse: (state) => {
-
-		// 		const [card1, card2] = state.clickedCards;
-
-		// 		if (card1.displayName !== card2.displayName) {
-		// 			const resetGameCards = state.gameCards.map((card) => {
-		// 				if (
-		// 					card.uuid === card1.uuid ||
-		// 					card.uuid === card2.uuid
-		// 				) {
-		// 					return {
-		// 						...card,
-		// 						flipped: false,
-		// 					};
-		// 				}
-		// 				return card;
-		// 			});
-
-		// 			state.gameCards = resetGameCards;
-		// 			state.clickedCards = [];
-		// 		}
-
-		// },
-
+		
 		onStartTimer: (state) => {
 			state.isPlaying = true;
 		},

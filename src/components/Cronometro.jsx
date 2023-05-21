@@ -42,8 +42,8 @@ export const Cronometro = () => {
 	}, [minutos])
 
 	return (
-		<div style={{ textAlign: 'center', height: '1.25rem', display: `${segundos > 0 || milisegundos > 0 ? 'flex' : 'none'}`, alignItems: 'center', justifyContent: 'center' }}>
-			<p style={{ margin: '0', padding: '0'  }}>
+		<div style={{ textAlign: 'right', height: '1.25rem', display: `${segundos > 0 || milisegundos > 0 ? 'block' : 'none'}`, alignItems: 'center', justifyContent: 'center' }}>
+			<p style={{ margin: '0', padding: '0' }}>
 			{minutos > 0 && <span>{minutos.toString().padStart(2, '0')} : </span>}
 				<span >{segundos.toString().padStart(2, '0')} : </span>
 				<span >{milisegundos.toString().padStart(2, '0')}</span>
