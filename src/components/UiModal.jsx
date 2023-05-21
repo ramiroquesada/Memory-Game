@@ -21,16 +21,16 @@ export const UiModal = () => {
 	const { isModalOpen, msg, gameMode, changeGameMode } = useUiStore();
 	const { onNewGame, isWin, gameOver } = useGameStore();
 
-	const { isWin : isMemoryWin, onNewMemoryGame } = useMemoryStore()
+	const { isWin: isMemoryWin, onNewMemoryGame } = useMemoryStore();
 
 	const [gameModeNull, setGameModeNull] = useState(
 		gameMode === null ? true : false
 	);
 
 	const onRestartGame = () => {
-		if(gameOver){
+		if (gameOver) {
 			onNewGame();
-		}else if (isMemoryWin){
+		} else if (isMemoryWin) {
 			onNewMemoryGame();
 		}
 	};
@@ -38,18 +38,22 @@ export const UiModal = () => {
 	if (isWin || isMemoryWin) {
 		const jsConfetti = new JSConfetti();
 
-		jsConfetti.addConfetti();
+
+		for (let i = 0; i <= 2; i++) {
+			setTimeout(() => {
+				jsConfetti.addConfetti();
+			}, 1200 *+ i) 
+			jsConfetti.clearCanvas();
+		}
 	}
 
 	const selectGamemode1 = () => {
-		changeGameMode(1)
-	}
+		changeGameMode(1);
+	};
 
 	const selectGamemode2 = () => {
-		changeGameMode(2)
-
-	}
-
+		changeGameMode(2);
+	};
 
 	return (
 		<Modal
@@ -61,21 +65,30 @@ export const UiModal = () => {
 			{gameModeNull ? (
 				<div className="modalContainer">
 					<h2>ELIGE UN MODO DE JUEGO</h2>
-					<div className='selectGameModeButtonsContainer'>
+					<div className="selectGameModeButtonsContainer">
 						<div>
-						<Typography variant='body1'>Selecciona sin repetir</Typography>
-						<Button variant="contained" fullWidth onClick={selectGamemode1}>
-							Jugar
-						</Button>
+							<Typography variant="body1">
+								Selecciona sin repetir
+							</Typography>
+							<Button
+								variant="contained"
+								fullWidth
+								onClick={selectGamemode1}>
+								Jugar
+							</Button>
 						</div>
 						<div>
-						<Typography variant='body1'>Encuentra las parejas</Typography>
-						<Button variant="contained" fullWidth onClick={selectGamemode2}>
-							Jugar
-						</Button>
+							<Typography variant="body1">
+								Encuentra las parejas
+							</Typography>
+							<Button
+								variant="contained"
+								fullWidth
+								onClick={selectGamemode2}>
+								Jugar
+							</Button>
 						</div>
 					</div>
-				
 				</div>
 			) : (
 				<div className="modalContainer">
