@@ -9,7 +9,6 @@ import {
 	Switch,
 	Toolbar,
 	Typography,
-	IconButton,
 	createTheme,
 	Tooltip,
 } from '@mui/material';
@@ -18,13 +17,11 @@ import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 import { useUiStore } from '../hooks/useUiStore';
 import { UiModal } from '../components/UiModal';
-import MyStopwatch from '../components/Stopwatch';
 import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
+import { Cronometro } from '../components/Cronometro';
 
 const theme = createTheme();
-
-
 
 
 export const Layout = () => {
@@ -164,7 +161,7 @@ export const Layout = () => {
 										{flipCount}
 									</strong>
 								</Typography>
-								<MyStopwatch />
+								<Cronometro />
 							</div>
 						) : (
 							<div
@@ -173,8 +170,8 @@ export const Layout = () => {
 									flexDirection: 'column',
 								}}>
 							<Typography marginLeft={'auto'} textAlign={'right'} fontSize={{xs:'0.77rem', md: '1.1rem'}} >
-								Puntaje: {clickedCards.length}
-								<br />
+								{clickedCards.length > 0 && <>Puntaje: {clickedCards.length} <br /></>}
+								
 								Record:{' '}
 								<strong className="record">{record}</strong>
 							</Typography>
