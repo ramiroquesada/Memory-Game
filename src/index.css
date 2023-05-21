@@ -1,8 +1,8 @@
-/* *,
-*::before,
-*::after {
-	box-sizing: border-box;
-} */
+html {
+	width: 100dvw;
+	background-color: #1c242e;
+
+}
 
 body {
 	margin: 0;
@@ -10,16 +10,13 @@ body {
 
 	width: 100dvw;
 	height: 100dvh;
-	background-color: #ff4656;
-}
 
-html {
-	background-color: #ff4656;
 }
 
 #root {
 	height: 100dvh;
-	background-color: #ff4656;
+	background: repeat center/100% url('/bg.JPG') ;
+
 }
 
 .modalContainer {
@@ -229,20 +226,16 @@ html {
 	align-items: center;
 	justify-content: center;
 	gap: 0.3rem;
-	font-size: 1rem;
 }
 
 .navMidToggle > p {
 	margin: 0;
-	
-	/* padding: 0; */
 }
 
 .navMidToggle > div {
 	display: flex;
 	align-items: center;
-	max-height: 25px;
-	min-height: 18px;
+	min-height: 27px;
 }
 
 .seconds{

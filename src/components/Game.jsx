@@ -23,7 +23,7 @@ export const Game = () => {
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
-				minHeight: 'calc(100dvh - 4rem)',
+				minHeight: 'calc(100dvh - 5rem)',
 			}}>
 			<Grid
 				container

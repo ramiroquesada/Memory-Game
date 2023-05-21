@@ -27,10 +27,14 @@ export const MemoryCard = ({ data }) => {
 			}`}
 			style={{
 				aspectRatio: '1/1',
-				background: `linear-gradient(180deg, #${data.gradient.join(', #')})`,
+				background: `linear-gradient(180deg, #${data.gradient.join(
+					', #'
+				)})`,
 				border: '1px solid #FFF',
 				maxHeight: '9rem',
-				borderRadius: '0.75rem'
+				maxWidth: '9rem',
+				borderRadius: '0.75rem',
+				alignContent: 'center',
 			}}>
 			<div className="card-inner">
 				<div className="card-front">
