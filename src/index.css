@@ -15,6 +15,7 @@ body {
 
 #root {
 	height: 100dvh;
+	width: 100dvw;
 	background: repeat center/100% url('/bg.JPG') ;
 
 }

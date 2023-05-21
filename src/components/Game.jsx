@@ -24,7 +24,9 @@ export const Game = () => {
 				display: 'flex',
 				justifyContent: 'center',
 				minHeight: 'calc(100dvh - 5rem)',
-			}}>
+				// padding: '1rem'
+			}}
+			sx={{paddingRight: { md: '6rem'}}}>
 			<Grid
 				container
 				justifyContent={'center'}

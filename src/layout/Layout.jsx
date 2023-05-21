@@ -86,7 +86,7 @@ export const Layout = () => {
 			<CssBaseline />
 			<AppBar position="relative" sx={{ minHeight: '5rem', justifyContent: 'center', background:'linear-gradient(0deg, #3c3a4c, #f94555)' }}>
 				<Toolbar sx={{ justifyContent: 'space-between', padding: 0 }}>
-					<Toolbar sx={{maxWidth: {xs:'9rem', md:'11rem'}}}>
+					<Toolbar sx={{width: {xs:'5rem', md:'6rem'}}} style={{paddingRight:'0' ,paddingLeft:'1rem'}}>
 						<PsychologyOutlined sx={{ fontSize: '3rem' }} />
 					</Toolbar>
 
@@ -149,7 +149,7 @@ export const Layout = () => {
 						</Toolbar>
 					</div>
 
-					<Toolbar sx={{ maxWidth: {xs:'7rem', md: '8rem'} }} style={{paddingRight:'1rem' ,paddingLeft:'0'}}>
+					<Toolbar sx={{ width: {xs:'5rem', md: '10rem'} }} style={{marginRight:'1rem' ,paddingLeft:'0'}}>
 						{gameMode === 2 ? (
 							<div
 								style={{
@@ -157,7 +157,7 @@ export const Layout = () => {
 									flexDirection: 'column',
 								}}>
 								<Typography
-								fontSize={{xs:'1rem', md: '1.2rem'}}
+								fontSize={{xs:'0.9rem', md: '1.2rem'}}
 									textAlign={'right'}>
 									Clicks:{' '}
 									<strong className="record">
@@ -172,7 +172,7 @@ export const Layout = () => {
 									display: 'flex',
 									flexDirection: 'column',
 								}}>
-							<Typography textAlign={'right'} fontSize={{xs:'0.85rem', md: '1.1rem'}} >
+							<Typography marginLeft={'auto'} textAlign={'right'} fontSize={{xs:'0.77rem', md: '1.1rem'}} >
 								Puntaje: {clickedCards.length}
 								<br />
 								Record:{' '}
