@@ -13,7 +13,7 @@ export const GameCard = ({ data }) => {
 		<Card
 			onClick={onClickCard}
 			key={data}
-			className=" gameCard2"
+			className="pjCard gameCard2"
 			
 			style={{
 				alignContent: 'center',
