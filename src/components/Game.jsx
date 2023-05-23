@@ -5,6 +5,7 @@ import { GameCard } from './GameCard';
 
 import { useGameStore } from '../hooks/useGameStore';
 import { useUiStore } from '../hooks/useUiStore';
+import { InfoBar } from './InfoBar';
 
 export const Game = () => {
 	const { isModalOpen } = useUiStore();
@@ -18,12 +19,14 @@ export const Game = () => {
 	}, [isData]);
 
 	return (
+		<Container>
+			<InfoBar />
 		<Container
 			maxWidth="lg"
 			style={{
 				display: 'flex',
 				justifyContent: 'center',
-				minHeight: 'calc(100dvh - 5rem)',
+				minHeight: 'calc(100dvh - 7rem)',
 				paddingBottom: '2rem',
 				paddingTop: '2rem',
 			}}>
@@ -45,6 +48,7 @@ export const Game = () => {
 				))}
 			</Grid>
 			{isModalOpen && <UiModal />}
+		</Container>
 		</Container>
 	);
 };
