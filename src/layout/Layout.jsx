@@ -39,7 +39,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export const Layout = () => {
 	const { gameMode, changeGameMode, isModalOpen, openModalSelectGameMode } =
 		useUiStore();
-	const { clickedCards, record, onNewRecord } = useGameStore();
+	const { record, onNewRecord } = useGameStore();
 	const { flipCount } = useMemoryStore();
 
 	const [open, setOpen] = useState(false);
@@ -147,12 +147,9 @@ export const Layout = () => {
 								<Typography
 									fontSize={{ xs: '1rem', sm: '1.2rem' }}
 									textAlign={'right'}>
-									Clicks:{' '}
-									<strong className="record">
-										{flipCount}
-									</strong>
+									Record:{' '}
+									<strong className="record">{'??'}</strong>
 								</Typography>
-								<Cronometro />
 							</div>
 						) : (
 							<div
@@ -164,15 +161,6 @@ export const Layout = () => {
 								<Typography
 									fontSize={{ xs: '1rem', sm: '1.2rem' }}
 									textAlign={'right'}>
-									{clickedCards.length > 0 && (
-										<>
-											Puntaje:{' '}
-											<strong>
-												{clickedCards.length}
-											</strong>
-											<br />
-										</>
-									)}
 									Record:{' '}
 									<strong className="record">{record}</strong>
 								</Typography>

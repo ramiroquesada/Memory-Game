@@ -9,6 +9,7 @@ export const gameSlice = createSlice({
 		gameOver: false,
 		record: 0,
 		isWin: false,
+		isPlaying: false,
 	},
 
 	reducers: {
@@ -22,6 +23,7 @@ export const gameSlice = createSlice({
 
 		onGameOver: (state) => {
 			state.gameOver = true;
+			state.isPlaying = false;
 		},
 
 		shuffleCards: (state) => {
@@ -46,7 +48,10 @@ export const gameSlice = createSlice({
 		},
 
 		onSetGameCards: (state) => {
+
 			state.isWin = false;
+			state.isPlaying = false;
+			state.gameOver = false;
 
 			state.clickedCards = [];
 
@@ -56,7 +61,6 @@ export const gameSlice = createSlice({
 
 			state.gameCards = newArray.slice(0, 9);
 
-			state.gameOver = false;
 		},
 
 		onSetNewRecord: (state, { payload }) => {
@@ -65,10 +69,13 @@ export const gameSlice = createSlice({
 
 		onWin: (state) => {
 			state.isWin = true;
+			state.isPlaying = false;
+
 		},
 
-		onLose: (state) => {
-			state.isWin = false;
+		
+		onStartTimer: (state) => {
+			state.isPlaying = true;
 		},
 	},
 });
@@ -81,5 +88,5 @@ export const {
 	onSetGameCards,
 	onSetNewRecord,
 	onWin,
-	onLose,
+	onStartTimer
 } = gameSlice.actions;
