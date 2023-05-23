@@ -88,7 +88,7 @@ export const useMemoryStore = () => {
 
 					setTimeout(() => {
 						dispatch(onCheckClickedCardsMatchFalse());
-					}, 1500);
+					}, 1000);
 				}
 			}
 		} else {

@@ -21,34 +21,37 @@ export const Game = () => {
 	return (
 		<Container>
 			<InfoBar />
-		<Container
-			maxWidth="lg"
-			style={{
-				display: 'flex',
-				justifyContent: 'center',
-				minHeight: 'calc(100dvh - 7rem)',
-				paddingBottom: '2rem',
-				paddingTop: '2rem',
-			}}>
-			<Grid
-				container
-				justifyContent={'center'}
-				alignItems={'center'}
-				spacing={2}>
-				{gameCards.map((card) => (
-					<Grid
-						justifyContent={'center'}
-						alignItems={'center'}
-						item
-						key={card.uuid}
-						xs={4}
-						sx={{ backgroundColor: 'transparent', placeContent: 'center'  }}>
-						<GameCard data={card}></GameCard>
-					</Grid>
-				))}
-			</Grid>
-			{isModalOpen && <UiModal />}
-		</Container>
+			<Container
+				maxWidth="lg"
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					minHeight: 'calc(100dvh - 7rem)',
+					paddingBottom: '2rem',
+					paddingTop: '2rem',
+				}}>
+				<Grid
+					container
+					justifyContent={'center'}
+					alignItems={'center'}
+					spacing={2}>
+					{gameCards.map((card) => (
+						<Grid
+							justifyContent={'center'}
+							alignItems={'center'}
+							item
+							key={card.uuid}
+							xs={4}
+							sx={{
+								backgroundColor: 'transparent',
+								placeContent: 'center',
+							}}>
+							<GameCard data={card}></GameCard>
+						</Grid>
+					))}
+				</Grid>
+				{isModalOpen && <UiModal />}
+			</Container>
 		</Container>
 	);
 };

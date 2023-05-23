@@ -20,7 +20,8 @@ import { useUiStore } from '../hooks/useUiStore';
 import { UiModal } from '../components/UiModal';
 import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
-import { Cronometro } from '../components/Cronometro';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import { RankingModal } from '../components/RankingModal';
 
 const theme = createTheme({ palette: { mode: 'light' } });
 
@@ -37,10 +38,15 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const Layout = () => {
-	const { gameMode, changeGameMode, isModalOpen, openModalSelectGameMode } =
-		useUiStore();
+	const {
+		gameMode,
+		changeGameMode,
+		isModalOpen,
+		openModalSelectGameMode,
+		isRecordsModalOpen,
+		openModalRecords,
+	} = useUiStore();
 	const { record, onNewRecord } = useGameStore();
-	const { flipCount } = useMemoryStore();
 
 	const [open, setOpen] = useState(false);
 
@@ -63,6 +69,10 @@ export const Layout = () => {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const handleOpenRanking = () => {
+		openModalRecords();
 	};
 
 	useEffect(() => {
@@ -93,11 +103,12 @@ export const Layout = () => {
 				}}>
 				<Toolbar sx={{ justifyContent: 'space-between', padding: 0 }}>
 					<Toolbar
-						sx={{ width: { xs: '5.5rem', sm: '7rem', md: '8rem' } }}
+						sx={{ width: { xs: '5rem' } }}
 						style={{ paddingRight: '0', paddingLeft: '0rem' }}>
-						<IconButton color="white">
+						<IconButton color="white" sx={{marginBottom: '7px'}} href='http://github.com/ramessj' target='_blank'>
 							<PsychologyOutlined
-								sx={{ fontSize: '3rem', color: 'white' }}
+								
+								sx={{ color: 'white', fontSize:"3rem" }}
 							/>
 						</IconButton>
 					</Toolbar>
@@ -105,17 +116,23 @@ export const Layout = () => {
 					<div
 						className="navMidToggle"
 						style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+						
 						<Switch
 							checked={checked}
 							onChange={handleSwitchChange}
-							color="info"
+							color="default"
 							value="Hola"
-						/>
+						>
+							
+						</Switch>
+						<Typography variant='body2'>Cambiar Modo</Typography>
 						<Backdrop
 							sx={{
+								background: 'rgba(0, 0, 0, 0.85);',
 								color: '#fff',
 								zIndex: (theme) => theme.zIndex.drawer + 1,
 							}}
+							
 							open={open}
 							onClick={handleClose}>
 							<Item elevation={24}>
@@ -131,48 +148,28 @@ export const Layout = () => {
 					</div>
 
 					<Toolbar
-						sx={{ width: { xs: '6rem', sm: '7rem', md: '9rem' } }}
+						// sx={{ width: { xs: '6rem', sm: '7rem', md: '9rem' } }}
 						style={{
 							paddingRight: '0',
 							paddingLeft: '0',
-							marginRight: '1rem',
+							// marginRight: '1rem',
 						}}>
-						{gameMode === 2 ? (
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									minWidth: '6rem',
-								}}>
-								<Typography
-									fontSize={{ xs: '1rem', sm: '1.2rem' }}
-									textAlign={'right'}>
-									Record:{' '}
-									<strong className="record">{'??'}</strong>
-								</Typography>
-							</div>
-						) : (
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									minWidth: '6rem',
-								}}>
-								<Typography
-									fontSize={{ xs: '1rem', sm: '1.2rem' }}
-									textAlign={'right'}>
-									Record:{' '}
-									<strong className="record">{record}</strong>
-								</Typography>
-							</div>
-						)}
+						<IconButton
+							onClick={handleOpenRanking}
+							sx={{ flexDirection: 'column' }}>
+							<LeaderboardIcon
+								sx={{ color: 'white' }}
+								fontSize="medium"
+							/>
+							<Typography color="white">Rankings</Typography>
+						</IconButton>
 					</Toolbar>
 				</Toolbar>
 			</AppBar>
 
 			{gameMode === 1 ? <Game /> : <Memory />}
-
 			{isModalOpen && <UiModal />}
+			{isRecordsModalOpen && <RankingModal />}
 		</ThemeProvider>
 	);
 };

@@ -32,15 +32,15 @@ export const Memory = () => {
 				style={{
 					display: 'flex',
 					justifyContent: 'center',
-					minHeight: 'calc(100dvh - 7rem)',
-					paddingBottom: '2rem',
-					paddingTop: '2rem',
+					minHeight: 'calc(100dvh - 8rem)',
+					marginBottom: '2rem',
+					paddingTop: '1rem',
 				}}>
 				<Grid
 					container
 					justifyContent={'center'}
 					alignItems={'center'}
-					spacing={2}>
+					spacing={1}>
 					{gameCards?.map((card) => (
 						<Grid
 							justifyContent={'center'}
