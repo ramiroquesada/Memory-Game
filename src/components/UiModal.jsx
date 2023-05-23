@@ -18,8 +18,8 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const UiModal = () => {
-	const { isModalOpen, msg, gameMode, changeGameMode } = useUiStore();
-	const { onNewGame, isWin, gameOver } = useGameStore();
+	const { isModalOpen, msg, gameMode, changeGameMode, openModalNewRecord, closeModal } = useUiStore();
+	const { onNewGame, isWin, gameOver, clickedCards } = useGameStore();
 
 	const { isWin: isMemoryWin, onNewMemoryGame } = useMemoryStore();
 
@@ -38,11 +38,10 @@ export const UiModal = () => {
 	if (isWin || isMemoryWin) {
 		const jsConfetti = new JSConfetti();
 
-
 		for (let i = 0; i <= 2; i++) {
 			setTimeout(() => {
 				jsConfetti.addConfetti();
-			}, 1200 *+ i) 
+			}, 1200 * +i);
 			jsConfetti.clearCanvas();
 		}
 	}
@@ -53,6 +52,10 @@ export const UiModal = () => {
 
 	const selectGamemode2 = () => {
 		changeGameMode(2);
+	};
+
+	const onClickNewRecord = () => {
+		openModalNewRecord();
 	};
 
 	return (
@@ -93,7 +96,11 @@ export const UiModal = () => {
 			) : (
 				<div className="modalContainer">
 					<h2>{msg}</h2>
-					<Button variant="contained" onClick={onRestartGame}>
+
+					<Button variant="contained" onClick={onClickNewRecord}>
+						Publicar Record
+					</Button>
+					<Button variant="outlined" onClick={onRestartGame}>
 						Jugar de nuevo
 					</Button>
 				</div>

@@ -14,14 +14,14 @@ import {
 	Paper,
 } from '@mui/material';
 
-import { useGameStore } from '../hooks/useGameStore';
-import { useMemoryStore } from '../hooks/useMemoryStore';
+
 import { useUiStore } from '../hooks/useUiStore';
 import { UiModal } from '../components/UiModal';
 import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { RankingModal } from '../components/RankingModal';
+import { NuevoRecordModal } from '../components/NuevoRecordModal';
 
 const theme = createTheme({ palette: { mode: 'light' } });
 
@@ -45,8 +45,8 @@ export const Layout = () => {
 		openModalSelectGameMode,
 		isRecordsModalOpen,
 		openModalRecords,
+		isNewRecordModalOpen
 	} = useUiStore();
-	const { record, onNewRecord } = useGameStore();
 
 	const [open, setOpen] = useState(false);
 
@@ -76,12 +76,7 @@ export const Layout = () => {
 	};
 
 	useEffect(() => {
-		const lsRecord = localStorage.getItem('record');
-
-		if (lsRecord > 0) {
-			onNewRecord(lsRecord);
-		}
-
+		
 		if (gameMode == null) {
 			openModalSelectGameMode();
 		} else if (gameMode == 1) {
@@ -170,6 +165,7 @@ export const Layout = () => {
 			{gameMode === 1 ? <Game /> : <Memory />}
 			{isModalOpen && <UiModal />}
 			{isRecordsModalOpen && <RankingModal />}
+			{isNewRecordModalOpen && <NuevoRecordModal />}
 		</ThemeProvider>
 	);
 };

@@ -56,7 +56,7 @@ export const Memory = () => {
 						</Grid>
 					))}
 				</Grid>
-				{isModalOpen && <UiModal />}
+				{/* {isModalOpen && <UiModal />} */}
 			</Container>
 		</Container>
 	);

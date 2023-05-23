@@ -84,7 +84,7 @@ export const useMemoryStore = () => {
 				if (clickedCards[0]?.displayName === card.displayName) {
 					dispatch(onCheckClickedCardsMatchTrue());
 				} else {
-					dispatch(onClickedAddMatchingClass())
+					dispatch(onClickedAddMatchingClass());
 
 					setTimeout(() => {
 						dispatch(onCheckClickedCardsMatchFalse());

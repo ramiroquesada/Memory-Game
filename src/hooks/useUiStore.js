@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onCloseModal, onOpenModalLose, onOpenModalSelectGameMode, onOpenModalWin, onSetGameMode, onOpenModalOnlineRecords, onCloseModalOnlineRecords } from "../redux/uiSlice";
+import { onCloseModal, onOpenModalLose, onOpenModalSelectGameMode, onOpenModalWin, onSetGameMode, onOpenModalOnlineRecords, onCloseModalOnlineRecords, onOpenModalNewRecord, onCloseModalNewRecord } from "../redux/uiSlice";
 import { rankingApi } from "../api/rankingApi";
 
 export const useUiStore = () => {
 
 	const dispatch = useDispatch();
-	const {isModalOpen, msg, gameMode, isRecordsModalOpen} = useSelector(state => state.ui);
+	const {isModalOpen, msg, gameMode, isRecordsModalOpen, isNewRecordModalOpen} = useSelector(state => state.ui);
 
 
 
@@ -39,6 +39,16 @@ export const useUiStore = () => {
 		dispatch(onCloseModalOnlineRecords())
 	}
 
+	const openModalNewRecord = () => {
+		dispatch(onOpenModalNewRecord());
+	}
+
+	const closeModalNewRecord = () => {
+		dispatch(onCloseModalNewRecord())
+	}
+
+
+
 	const startGettingOnlineRecords = async() => {
 		try {
 			const resp = await rankingApi.get('/leaderboard');
@@ -50,11 +60,20 @@ export const useUiStore = () => {
 		}
 	}
 
+	const startPostingNewRecord = async({data}) => {
+		try {
+			
+		} catch (error) {
+			
+		}
+	}
+
 	return {
 		isModalOpen,
 		msg,
 		gameMode,
 		isRecordsModalOpen,
+		isNewRecordModalOpen,
 
 		openModalWin,
 		openModalLose,
@@ -63,7 +82,10 @@ export const useUiStore = () => {
 		openModalSelectGameMode,
 		startGettingOnlineRecords,
 		openModalRecords,
-		closeModalRecords
+		closeModalRecords,
+		startPostingNewRecord,
+		openModalNewRecord,
+		closeModalNewRecord
 		
 	};
 };
