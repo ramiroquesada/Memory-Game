@@ -85,6 +85,7 @@ body {
 	}
 }
 
+
 .ReactModalPortal > div {
 	opacity: 0;
 }
@@ -158,7 +159,6 @@ body {
 
 .card-back {
 	transform: rotateY(180deg);
-	/* Estilos adicionales para la parte de atrás de la tarjeta */
 }
 
 .pjCardMemory.flipped {
@@ -166,10 +166,6 @@ body {
 	cursor: default;
 }
 
-.matchedCard {
-	border-color: green;
-	border-width: 2px;
-}
 
 .selectGameModeButtonsContainer {
 	display: flex;
@@ -256,4 +252,49 @@ body {
 	-moz-transition: font-size 20ms ease-in;
 	-ms-transition: font-size 20ms ease-in;
 	-o-transition: font-size 20ms ease-in;
+}
+
+.pjCardMemory{
+	border: 1px solid #FFF;
+}
+
+.flipped{
+	border: 3px solid rgb(0, 255, 0)
+}
+
+.clicked{
+	border: 2px solid rgb(255, 238, 0);
+}
+
+.matching{
+	border: 5px solid transparent;
+	animation: border-flash 510ms infinite;
+	-webkit-animation: border-flash 510ms infinite;
+}
+
+
+
+@keyframes border-flash {
+  0% {
+    border-color: transparent;
+  }
+  15% {
+    border-color: rgba(255, 0, 0, 0.33);
+  }
+  30% {
+    border-color: rgba(255, 0, 0, 0.66);
+  }
+  50% {
+    border-color: rgba(255, 0, 0, 1);
+  }
+  70% {
+    border-color: rgba(255, 0, 0, 0.66);
+  }
+  85% {
+    border-color: rgba(255, 0, 0, 0.33);
+  }
+  100% {
+    border-color: transparent;
+  }
+	
 }

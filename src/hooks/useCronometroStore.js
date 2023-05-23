@@ -13,7 +13,6 @@ export const useCronometroStore = () => {
 
 	const { minutos, segundos, milisegundos, corriendo } = useSelector(state => state.cronometro);
 
-	// Inicia el cronómetro al montar el componente
 	useEffect(() => {
 		const intervalo = setInterval(() => {
 			dispatch(actualizarTiempo());
@@ -22,7 +21,6 @@ export const useCronometroStore = () => {
 		return () => clearInterval(intervalo);
 	}, []);
 
-	// Funciones de control del cronómetro
 	const handleIniciar = () => {
 		dispatch(iniciarCronometro());
 	};

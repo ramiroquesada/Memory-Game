@@ -10,6 +10,7 @@ import {
 	onCheckWin,
 	onCheckClickedCardsMatchTrue,
 	onCheckClickedCardsMatchFalse,
+	onClickedAddMatchingClass,
 } from '../redux/memorySlice';
 import { onCloseModal } from '../redux/uiSlice';
 
@@ -83,9 +84,11 @@ export const useMemoryStore = () => {
 				if (clickedCards[0]?.displayName === card.displayName) {
 					dispatch(onCheckClickedCardsMatchTrue());
 				} else {
+					dispatch(onClickedAddMatchingClass())
+
 					setTimeout(() => {
 						dispatch(onCheckClickedCardsMatchFalse());
-					}, 1250);
+					}, 1500);
 				}
 			}
 		} else {

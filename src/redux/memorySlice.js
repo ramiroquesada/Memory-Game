@@ -91,6 +91,7 @@ export const memorySlice = createSlice({
 					return {
 						...card,
 						flipped: true,
+						matched: true,
 					};
 				}
 				return card;
@@ -107,6 +108,7 @@ export const memorySlice = createSlice({
 					return {
 						...card,
 						flipped: false,
+						matching: false,
 					};
 				}
 				return card;
@@ -115,7 +117,23 @@ export const memorySlice = createSlice({
 			state.gameCards = resetGameCards;
 			state.clickedCards = [];
 		},
-		
+
+		onClickedAddMatchingClass: (state) => {
+			const [card1, card2] = state.clickedCards;
+
+			const resetGameCards = state.gameCards.map((card) => {
+				if (card.uuid === card1.uuid || card.uuid === card2.uuid) {
+					return {
+						...card,
+						matching: true,
+					};
+				}
+				return card;
+			});
+
+			state.gameCards = resetGameCards;
+		},
+
 		onStartTimer: (state) => {
 			state.isPlaying = true;
 		},
@@ -137,4 +155,5 @@ export const {
 	onCheckClickedCardsMatchFalse,
 	onStartTimer,
 	onCheckWin,
+	onClickedAddMatchingClass,
 } = memorySlice.actions;

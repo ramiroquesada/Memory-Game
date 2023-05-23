@@ -10,6 +10,10 @@ export const MemoryCard = ({ data }) => {
 	);
 	const isClicked = clickedCards.some((card) => card.uuid === data.uuid);
 
+	const isMatching = gameCards.some(
+		(card) => card.uuid === data.uuid && card.matching
+	);
+
 	const onClickCard = () => {
 		if (clickedCards.length < 2) {
 			startClickCard(data);
@@ -23,14 +27,14 @@ export const MemoryCard = ({ data }) => {
 			onClick={onClickCard}
 			key={data}
 			className={`pjCardMemory pjCard ${
-				isFlipped || isClicked ? 'flipped' : ''
-			}`}
+				isFlipped  ? 'flipped' : ''
+			} ${isMatching ? 'matching' : ''} ${isClicked ? 'clicked' : ''}`}
 			style={{
 				aspectRatio: '1/1',
 				background: `linear-gradient(180deg, #${data.gradient.join(
 					', #'
 				)})`,
-				border: '1px solid #FFF',
+				// border: '1px solid #FFF',
 				maxHeight: '9rem',
 				maxWidth: '9rem',
 				borderRadius: '0.75rem',
