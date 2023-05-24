@@ -43,7 +43,7 @@ export const memorySlice = createSlice({
 
 			const newArray = [...state.allCards]
 				?.sort(() => Math.random() - 0.5)
-				.slice(0, 1); //////////////////////////////////////10 EN VEZ DE 2
+				.slice(0, 10); //////////////////////////////////////10 EN VEZ DE 2
 
 			const newArray2 = [...newArray, ...newArray];
 
