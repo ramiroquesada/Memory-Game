@@ -163,9 +163,13 @@ export const Layout = () => {
 			</AppBar>
 
 			{gameMode === 1 ? <Game /> : <Memory />}
+
 			{isModalOpen && <UiModal />}
-			{isRecordsModalOpen && <RankingModal />}
-			{isNewRecordModalOpen && <NuevoRecordModal />}
+
+			{ isRecordsModalOpen && <RankingModal />}
+
+			{isNewRecordModalOpen &&  <NuevoRecordModal /> }
+
 		</ThemeProvider>
 	);
 };

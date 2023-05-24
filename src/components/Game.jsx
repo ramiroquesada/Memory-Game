@@ -50,7 +50,6 @@ export const Game = () => {
 						</Grid>
 					))}
 				</Grid>
-				{/* {isModalOpen && <UiModal />} */}
 			</Container>
 		</Container>
 	);
