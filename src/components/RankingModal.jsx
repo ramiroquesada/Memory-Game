@@ -1,7 +1,19 @@
 import Modal from 'react-modal';
 
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useUiStore } from "../hooks/useUiStore"
+import {
+	Container,
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from '@mui/material';
+import { useUiStore } from '../hooks/useUiStore';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
+import { formatDate } from '../helpers/formatDate';
 
 const customStyles = {
 	content: {
@@ -15,21 +27,33 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const RankingModal = () => {
-
-	const { startGettingOnlineRecords, isRecordsModalOpen, closeModalRecords, gameMode } = useUiStore()
-
-	// const onlineRecords = startGettingOnlineRecords();
-
-	// console.log(onlineRecords)
+	const {
+		startGettingOnlineRecords,
+		isRecordsModalOpen,
+		closeModalRecords,
+		gameMode,
+		onlineRecords,
+	} = useUiStore();
 
 	const handleCloseRankingModal = () => {
-		closeModalRecords()
-	}
-	
+		closeModalRecords();
+	};
+
+	const gameModeRecords = useMemo(() => {
+		if (gameMode == 1) {
+			return onlineRecords?.clickAllRecords;
+		} else if (gameMode == 2) {
+			return onlineRecords?.memoryRecords;
+		}
+	});
+
+	useEffect(() => {
+		if (!onlineRecords) {
+			startGettingOnlineRecords();
+		}
+	}, [onlineRecords]);
 
 	return (
-		
-		
 		<Modal
 			isOpen={isRecordsModalOpen}
 			style={customStyles}
@@ -37,12 +61,12 @@ export const RankingModal = () => {
 			overlayClassName="modal-fondo"
 			closeTimeoutMS={200}
 			onRequestClose={handleCloseRankingModal}>
-				
-			<TableContainer component={Paper} >
-				<Table >
+
+				<div className='modalContainer' style={{margin: '1rem 0'}}>
+				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell>Nº</TableCell>
+							<TableCell></TableCell>
 							<TableCell>Nombre</TableCell>
 							<TableCell>Tiempo</TableCell>
 							<TableCell>Clicks</TableCell>
@@ -50,18 +74,22 @@ export const RankingModal = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						<TableRow>
-							<TableCell>Soon</TableCell>
-							<TableCell>Soon</TableCell>
-							<TableCell>Soon</TableCell>
-							<TableCell>Soon</TableCell>
-							<TableCell>Soon</TableCell>
-						</TableRow>
+						{gameModeRecords?.map((record) => (
+							<TableRow key={record._id}>
+								<TableCell>
+									{gameModeRecords?.indexOf(record) + 1}º
+								</TableCell>
+								<TableCell>{record.name}</TableCell>
+								<TableCell>
+									{record.time.minutes}:{record.time.seconds}:{record.time.miliseconds}
+								</TableCell>
+								<TableCell>{record.clicks}</TableCell>
+								<TableCell>{formatDate(record.date)}</TableCell>
+							</TableRow>
+						))}
 					</TableBody>
 				</Table>
-			</TableContainer>
-
-
+			</div>
 		</Modal>
-	)
-}
+	);
+};

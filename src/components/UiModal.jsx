@@ -5,6 +5,9 @@ import JSConfetti from 'js-confetti';
 import { Button, Typography } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
+import { useMemo } from 'react';
+import { useCronometroStore } from '../hooks/useCronometroStore';
+import { useEffect } from 'react';
 
 const customStyles = {
 	content: {
@@ -18,14 +21,49 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const UiModal = () => {
-	const { isModalOpen, msg, gameMode, changeGameMode, openModalNewRecord, closeModal } = useUiStore();
+	const { minutos, segundos, milisegundos } = useCronometroStore();
+
+	const {
+		isModalOpen,
+		msg,
+		gameMode,
+		changeGameMode,
+		openModalNewRecord,
+		closeModal,
+	} = useUiStore();
 	const { onNewGame, isWin, gameOver, clickedCards } = useGameStore();
 
-	const { isWin: isMemoryWin, onNewMemoryGame } = useMemoryStore();
+	const { isWin: isMemoryWin, onNewMemoryGame, flipCount } = useMemoryStore();
 
 	const [gameModeNull, setGameModeNull] = useState(
 		gameMode === null ? true : false
 	);
+
+	
+
+	const recordData = useMemo(() => {
+		const time = {
+			minutes: minutos,
+			seconds: segundos,
+			miliseconds: milisegundos,
+		};
+
+		if (isMemoryWin) {
+			const clicks = flipCount;
+
+			return {
+				clicks,
+				time,
+			};
+		} else if (gameOver) {
+			const clicks = clickedCards.length;
+
+			return {
+				clicks,
+				time,
+			};
+		}
+	});
 
 	const onRestartGame = () => {
 		if (gameOver) {
@@ -34,6 +72,19 @@ export const UiModal = () => {
 			onNewMemoryGame();
 		}
 	};
+
+	useEffect(()=>{
+		if (isWin || isMemoryWin) {
+			const jsConfetti = new JSConfetti();
+	
+			for (let i = 0; i <= 2; i++) {
+				setTimeout(() => {
+					jsConfetti.addConfetti();
+				}, 1200 * +i);
+				jsConfetti.clearCanvas();
+			}
+		}
+	}, [recordData])
 
 	if (isWin || isMemoryWin) {
 		const jsConfetti = new JSConfetti();
@@ -94,9 +145,18 @@ export const UiModal = () => {
 					</div>
 				</div>
 			) : (
-				<div className="modalContainer">
-					<Typography marginTop={'1rem'}>{msg}</Typography>
-
+				<div className="modalContainer" >
+					<h2 style={{margin: '1rem 0 0 0'}}>{msg}</h2>
+					<Typography textAlign={'center'}>
+						Tu tiempo:{' '}
+						<strong>
+							{recordData.time.minutes} :{' '}
+							{recordData.time.seconds} :{' '}
+							{recordData.time.miliseconds}
+						</strong>
+						<br />
+						Clicks: <strong>{recordData.clicks}</strong>
+					</Typography>
 					<Button variant="contained" onClick={onClickNewRecord}>
 						Publicar Record
 					</Button>

@@ -8,6 +8,7 @@ export const uiSlice = createSlice({
 		gameMode: null,
 		isRecordsModalOpen: false,
 		isNewRecordModalOpen: false,
+		onlineRecords: null,
 	},
 
 	reducers: {
@@ -48,10 +49,14 @@ export const uiSlice = createSlice({
 
 		onCloseModalNewRecord: (state) => {
 			state.isNewRecordModalOpen = false;
+		},
+		
+		onSetOnlineRecords: (state, {payload}) => {
+			state.onlineRecords = payload
 		}
 		
 
 	},
 })
 
-export const { onOpenModalWin, onOpenModalLose, onCloseModal, onSetGameMode, onOpenModalSelectGameMode, onOpenModalOnlineRecords, onCloseModalOnlineRecords, onOpenModalNewRecord, onCloseModalNewRecord } = uiSlice.actions
+export const { onOpenModalWin, onOpenModalLose, onCloseModal, onSetGameMode, onOpenModalSelectGameMode, onOpenModalOnlineRecords, onCloseModalOnlineRecords, onOpenModalNewRecord, onCloseModalNewRecord, onSetOnlineRecords } = uiSlice.actions
