@@ -1,13 +1,12 @@
+import { useMemo, useEffect } from 'react';
+import Modal from 'react-modal';
 import { useState } from 'react';
 import { useUiStore } from '../hooks/useUiStore';
-import Modal from 'react-modal';
 import JSConfetti from 'js-confetti';
 import { Button, Typography } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
-import { useMemo } from 'react';
 import { useCronometroStore } from '../hooks/useCronometroStore';
-import { useEffect } from 'react';
 
 const customStyles = {
 	content: {
@@ -23,14 +22,8 @@ Modal.setAppElement('#root');
 export const UiModal = () => {
 	const { minutos, segundos, milisegundos } = useCronometroStore();
 
-	const {
-		isModalOpen,
-		msg,
-		gameMode,
-		changeGameMode,
-		openModalNewRecord,
-		closeModal,
-	} = useUiStore();
+	const { isModalOpen, msg, gameMode, changeGameMode, openModalNewRecord } =
+		useUiStore();
 	const { onNewGame, isWin, gameOver, clickedCards } = useGameStore();
 
 	const { isWin: isMemoryWin, onNewMemoryGame, flipCount } = useMemoryStore();
@@ -38,8 +31,6 @@ export const UiModal = () => {
 	const [gameModeNull, setGameModeNull] = useState(
 		gameMode === null ? true : false
 	);
-
-	
 
 	const recordData = useMemo(() => {
 		const time = {
@@ -73,10 +64,10 @@ export const UiModal = () => {
 		}
 	};
 
-	useEffect(()=>{
+	useEffect(() => {
 		if (isWin || isMemoryWin) {
 			const jsConfetti = new JSConfetti();
-	
+
 			for (let i = 0; i <= 2; i++) {
 				setTimeout(() => {
 					jsConfetti.addConfetti();
@@ -84,7 +75,7 @@ export const UiModal = () => {
 				jsConfetti.clearCanvas();
 			}
 		}
-	}, [recordData])
+	}, [recordData]);
 
 	if (isWin || isMemoryWin) {
 		const jsConfetti = new JSConfetti();
@@ -145,8 +136,8 @@ export const UiModal = () => {
 					</div>
 				</div>
 			) : (
-				<div className="modalContainer" >
-					<h2 style={{margin: '1rem 0 0 0'}}>{msg}</h2>
+				<div className="modalContainer">
+					<h2 style={{ margin: '1rem 0 0 0' }}>{msg}</h2>
 					<Typography textAlign={'center'}>
 						Tu tiempo:{' '}
 						<strong>

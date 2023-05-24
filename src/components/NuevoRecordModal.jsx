@@ -1,15 +1,10 @@
+import { useMemo } from 'react';
 import Modal from 'react-modal';
 
-import {
-	Button,
-	
-	TextField,
-	Typography,
-} from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { useUiStore } from '../hooks/useUiStore';
 import { useCronometroStore } from '../hooks/useCronometroStore';
 import { useForm } from '../hooks/useForm';
-import { useMemo } from 'react';
 import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 import Swal from 'sweetalert2';
@@ -57,10 +52,9 @@ export const NuevoRecordModal = () => {
 				clicks,
 				date,
 				gameMode,
-				time
-			}
-
-		}else if(gameOver){
+				time,
+			};
+		} else if (gameOver) {
 			const clicks = clickedCards.length;
 			const date = new Date().getTime();
 			const gameMode = { modeName: 'Memory All', modeId: 1 };
@@ -69,30 +63,31 @@ export const NuevoRecordModal = () => {
 				clicks,
 				date,
 				gameMode,
-				time
-			}
+				time,
+			};
 		}
-
-		
 	});
 
 	const handleCloseRankingModal = () => {
 		closeModalNewRecord();
 	};
 
-	const handleRecordSubmit = async() => {
+	const handleRecordSubmit = async () => {
 		const newRecord = { ...formState, ...recordData };
 		const recordPosted = await startPostingNewRecord(newRecord);
-		if(recordPosted){
-			Swal.fire('Record posteado!', 'Revisa el ranking para ver si eres de los mejores', 'success')
-			closeModalNewRecord()
-		if( isMemoryWin ){
-			onNewMemoryGame();
-		}else if(gameOver){
-			onNewGame()
+		if (recordPosted) {
+			Swal.fire(
+				'Record posteado!',
+				'Revisa el ranking para ver si eres de los mejores',
+				'success'
+			);
+			closeModalNewRecord();
+			if (isMemoryWin) {
+				onNewMemoryGame();
+			} else if (gameOver) {
+				onNewGame();
+			}
 		}
-		}
-		
 	};
 
 	return (
@@ -101,9 +96,10 @@ export const NuevoRecordModal = () => {
 			style={customStyles}
 			className="modal"
 			overlayClassName="modalNuevoRecord-fondo"
-			closeTimeoutMS={200}
-			>
-			<div className="modalContainer" style={{padding: '1rem 2rem 0 2rem'}}>
+			closeTimeoutMS={200}>
+			<div
+				className="modalContainer"
+				style={{ padding: '1rem 2rem 0 2rem' }}>
 				<form
 					onSubmit={handleRecordSubmit}
 					style={{
@@ -112,10 +108,13 @@ export const NuevoRecordModal = () => {
 						flexDirection: 'column',
 						gap: '1rem',
 					}}>
-					
-
 					<Typography textAlign={'center'}>
-						Tu tiempo: <strong>{recordData.time.minutes} : {recordData.time.seconds} : {recordData.time.miliseconds}</strong>
+						Tu tiempo:{' '}
+						<strong>
+							{recordData.time.minutes} :{' '}
+							{recordData.time.seconds} :{' '}
+							{recordData.time.miliseconds}
+						</strong>
 						<br />
 						Clicks: <strong>{recordData.clicks}</strong>
 					</Typography>
@@ -128,19 +127,16 @@ export const NuevoRecordModal = () => {
 						value={name}
 					/>
 					<Button
-						style={{marginTop: '1rem'}}
+						style={{ marginTop: '1rem' }}
 						variant="contained"
 						fullWidth
 						onClick={handleRecordSubmit}>
 						Publicar Record
 					</Button>
 
-					<Button
-												variant="text"
-						onClick={handleCloseRankingModal}>
+					<Button variant="text" onClick={handleCloseRankingModal}>
 						Cancelar
 					</Button>
-
 				</form>
 			</div>
 		</Modal>

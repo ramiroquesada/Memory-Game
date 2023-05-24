@@ -14,7 +14,6 @@ import {
 	Paper,
 } from '@mui/material';
 
-
 import { useUiStore } from '../hooks/useUiStore';
 import { UiModal } from '../components/UiModal';
 import { Memory } from '../components/Memory';
@@ -45,7 +44,7 @@ export const Layout = () => {
 		openModalSelectGameMode,
 		isRecordsModalOpen,
 		openModalRecords,
-		isNewRecordModalOpen
+		isNewRecordModalOpen,
 	} = useUiStore();
 
 	const [open, setOpen] = useState(false);
@@ -76,7 +75,6 @@ export const Layout = () => {
 	};
 
 	useEffect(() => {
-		
 		if (gameMode == null) {
 			openModalSelectGameMode();
 		} else if (gameMode == 1) {
@@ -100,10 +98,13 @@ export const Layout = () => {
 					<Toolbar
 						sx={{ width: { xs: '5rem' } }}
 						style={{ paddingRight: '0', paddingLeft: '0rem' }}>
-						<IconButton color="white" sx={{marginBottom: '7px'}} href='http://github.com/ramessj' target='_blank'>
+						<IconButton
+							color="white"
+							sx={{ marginBottom: '7px' }}
+							href="http://github.com/ramessj"
+							target="_blank">
 							<PsychologyOutlined
-								
-								sx={{ color: 'white', fontSize:"3rem" }}
+								sx={{ color: 'white', fontSize: '3rem' }}
 							/>
 						</IconButton>
 					</Toolbar>
@@ -111,23 +112,18 @@ export const Layout = () => {
 					<div
 						className="navMidToggle"
 						style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-						
 						<Switch
 							checked={checked}
 							onChange={handleSwitchChange}
 							color="default"
-							value="Hola"
-						>
-							
-						</Switch>
-						<Typography variant='body2'>Cambiar Modo</Typography>
+							value="Hola"></Switch>
+						<Typography variant="body2">Cambiar Modo</Typography>
 						<Backdrop
 							sx={{
 								background: 'rgba(0, 0, 0, 0.85);',
 								color: '#fff',
 								zIndex: (theme) => theme.zIndex.drawer + 1,
 							}}
-							
 							open={open}
 							onClick={handleClose}>
 							<Item elevation={24}>
@@ -143,11 +139,9 @@ export const Layout = () => {
 					</div>
 
 					<Toolbar
-						// sx={{ width: { xs: '6rem', sm: '7rem', md: '9rem' } }}
 						style={{
 							paddingRight: '0',
 							paddingLeft: '0',
-							// marginRight: '1rem',
 						}}>
 						<IconButton
 							onClick={handleOpenRanking}
@@ -166,10 +160,9 @@ export const Layout = () => {
 
 			{isModalOpen && <UiModal />}
 
-			{ isRecordsModalOpen && <RankingModal />}
+			{isRecordsModalOpen && <RankingModal />}
 
-			{isNewRecordModalOpen &&  <NuevoRecordModal /> }
-
+			{isNewRecordModalOpen && <NuevoRecordModal />}
 		</ThemeProvider>
 	);
 };

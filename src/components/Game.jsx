@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Container, Grid } from '@mui/material';
-import { UiModal } from './UiModal';
 import { GameCard } from './GameCard';
 
 import { useGameStore } from '../hooks/useGameStore';
-import { useUiStore } from '../hooks/useUiStore';
 import { InfoBar } from './InfoBar';
 
 export const Game = () => {
-	const { isModalOpen } = useUiStore();
 
-	const { gameCards, allCards, startGettingCards, isWin } = useGameStore();
+	const { gameCards, allCards, startGettingCards } = useGameStore();
 
 	const [isData, setIsData] = useState(allCards.length > 0 || false);
 

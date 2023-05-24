@@ -1,18 +1,14 @@
+import { useEffect, useMemo } from 'react';
 import Modal from 'react-modal';
 
 import {
-	Container,
-	Paper,
 	Table,
 	TableBody,
 	TableCell,
-	TableContainer,
 	TableHead,
 	TableRow,
 } from '@mui/material';
 import { useUiStore } from '../hooks/useUiStore';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
 import { formatDate } from '../helpers/formatDate';
 
 const customStyles = {
@@ -61,8 +57,7 @@ export const RankingModal = () => {
 			overlayClassName="modal-fondo"
 			closeTimeoutMS={200}
 			onRequestClose={handleCloseRankingModal}>
-
-				<div className='modalContainer' style={{margin: '1rem 0'}}>
+			<div className="modalContainer" style={{ margin: '1rem 0' }}>
 				<Table>
 					<TableHead>
 						<TableRow>
@@ -81,7 +76,8 @@ export const RankingModal = () => {
 								</TableCell>
 								<TableCell>{record.name}</TableCell>
 								<TableCell>
-									{record.time.minutes}:{record.time.seconds}:{record.time.miliseconds}
+									{record.time.minutes}:{record.time.seconds}:
+									{record.time.miliseconds}
 								</TableCell>
 								<TableCell>{record.clicks}</TableCell>
 								<TableCell>{formatDate(record.date)}</TableCell>

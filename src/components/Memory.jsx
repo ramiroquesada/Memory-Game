@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { UiModal } from './UiModal';
 import { Container, Grid } from '@mui/material';
 import { MemoryCard } from './MemoryCard';
 import { useMemoryStore } from '../hooks/useMemoryStore';
@@ -7,7 +6,7 @@ import { useUiStore } from '../hooks/useUiStore';
 import { InfoBar } from './InfoBar';
 
 export const Memory = () => {
-	const { isModalOpen, openModalWin } = useUiStore();
+	const { openModalWin } = useUiStore();
 
 	const { gameCards, allCards, startGettingCards, isWin } = useMemoryStore();
 
