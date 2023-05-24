@@ -2,9 +2,7 @@ import Modal from 'react-modal';
 
 import {
 	Button,
-	FormControl,
-	Input,
-	InputLabel,
+	
 	TextField,
 	Typography,
 } from '@mui/material';
@@ -32,7 +30,7 @@ const formData = {
 };
 
 export const NuevoRecordModal = () => {
-	const { isNewRecordModalOpen, gameMode, closeModalNewRecord, closeModal, startPostingNewRecord } =
+	const { isNewRecordModalOpen, closeModalNewRecord, startPostingNewRecord } =
 		useUiStore();
 
 	const { minutos, segundos, milisegundos } = useCronometroStore();
@@ -104,12 +102,12 @@ export const NuevoRecordModal = () => {
 			className="modal"
 			overlayClassName="modalNuevoRecord-fondo"
 			closeTimeoutMS={200}
-			onRequestClose={handleCloseRankingModal}>
-			<div className="modalContainer">
+			>
+			<div className="modalContainer" style={{padding: '1rem 2rem 0 2rem'}}>
 				<form
 					onSubmit={handleRecordSubmit}
 					style={{
-						margin: '2rem 1rem 1rem 1rem',
+						margin: '2rem 1rem 0 1rem',
 						display: 'flex',
 						flexDirection: 'column',
 						gap: '1rem',
@@ -136,6 +134,13 @@ export const NuevoRecordModal = () => {
 						onClick={handleRecordSubmit}>
 						Publicar Record
 					</Button>
+
+					<Button
+												variant="text"
+						onClick={handleCloseRankingModal}>
+						Cancelar
+					</Button>
+
 				</form>
 			</div>
 		</Modal>
