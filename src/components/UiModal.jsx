@@ -95,7 +95,7 @@ export const UiModal = () => {
 				</div>
 			) : (
 				<div className="modalContainer">
-					<h2>{msg}</h2>
+					<Typography marginTop={'1rem'}>{msg}</Typography>
 
 					<Button variant="contained" onClick={onClickNewRecord}>
 						Publicar Record

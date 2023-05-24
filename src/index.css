@@ -23,7 +23,6 @@ body {
 .modalContainer {
 	display: flex;
 	flex-direction: column;
-	margin: 0.2rem;
 	margin-bottom: 2rem;
 	gap: 1.5rem;
 	padding-left: 1rem;
@@ -103,6 +102,14 @@ body {
 
 .modal-fondo {
 	background-color: rgba(0, 0, 0, 0.8);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	position: fixed;
+}
+
+.modalNuevoRecord-fondo{
 	bottom: 0;
 	left: 0;
 	right: 0;

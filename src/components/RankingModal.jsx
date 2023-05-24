@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useUiStore } from "../hooks/useUiStore"
 
 const customStyles = {
@@ -28,6 +28,8 @@ export const RankingModal = () => {
 	
 
 	return (
+		
+		
 		<Modal
 			isOpen={isRecordsModalOpen}
 			style={customStyles}
@@ -36,7 +38,7 @@ export const RankingModal = () => {
 			closeTimeoutMS={200}
 			onRequestClose={handleCloseRankingModal}>
 				
-			<TableContainer component={Paper}>
+			<TableContainer component={Paper} >
 				<Table >
 					<TableHead>
 						<TableRow>
@@ -48,7 +50,13 @@ export const RankingModal = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-
+						<TableRow>
+							<TableCell>Soon</TableCell>
+							<TableCell>Soon</TableCell>
+							<TableCell>Soon</TableCell>
+							<TableCell>Soon</TableCell>
+							<TableCell>Soon</TableCell>
+						</TableRow>
 					</TableBody>
 				</Table>
 			</TableContainer>

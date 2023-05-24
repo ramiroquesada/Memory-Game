@@ -13,11 +13,11 @@ export const uiSlice = createSlice({
 	reducers: {
 
 		onOpenModalWin: (state) => {
-			state.msg = 'Felicidades ganaste 😎';
+			state.msg = 'Felicidades, ganaste 😎😎😎';
 			state.isModalOpen = true;
 		},
 		onOpenModalLose: (state) => {
-			state.msg = 'Lástima perdiste 😂';
+			state.msg = 'Lástima, perdiste 😂😂😂';
 			state.isModalOpen = true;
 		},
 		onCloseModal: (state) => {

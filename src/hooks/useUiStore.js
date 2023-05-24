@@ -51,7 +51,7 @@ export const useUiStore = () => {
 
 	const startGettingOnlineRecords = async() => {
 		try {
-			const resp = await rankingApi.get('/leaderboard');
+			const resp = await rankingApi.get('/leaderboard/all');
 			const {data} = resp
 			console.log(data)
 			return data
@@ -60,11 +60,17 @@ export const useUiStore = () => {
 		}
 	}
 
-	const startPostingNewRecord = async({data}) => {
+	const startPostingNewRecord = async( newRecord) => {
 		try {
-			
+
+			const resp = await rankingApi.post('/new', newRecord);
+
+			const {data} = resp
+
+			return data
+
 		} catch (error) {
-			
+			console.log(error)
 		}
 	}
 

@@ -24,7 +24,7 @@ export const Memory = () => {
 	}, [isWin]);
 
 	return (
-		<Container>
+		<Container maxWidth="lg">
 			<InfoBar />
 
 			<Container
@@ -40,7 +40,7 @@ export const Memory = () => {
 					container
 					justifyContent={'center'}
 					alignItems={'center'}
-					spacing={1}>
+					spacing={2}>
 					{gameCards?.map((card) => (
 						<Grid
 							justifyContent={'center'}
