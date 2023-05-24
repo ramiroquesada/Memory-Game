@@ -24,7 +24,7 @@ export const Memory = () => {
 	}, [isWin]);
 
 	return (
-		<Container>
+		<Container maxWidth="lg">
 			<InfoBar />
 
 			<Container
@@ -32,9 +32,9 @@ export const Memory = () => {
 				style={{
 					display: 'flex',
 					justifyContent: 'center',
-					minHeight: 'calc(100dvh - 7rem)',
-					paddingBottom: '2rem',
-					paddingTop: '2rem',
+					minHeight: 'calc(100dvh - 8rem)',
+					marginBottom: '2rem',
+					paddingTop: '1rem',
 				}}>
 				<Grid
 					container
@@ -56,7 +56,6 @@ export const Memory = () => {
 						</Grid>
 					))}
 				</Grid>
-				{isModalOpen && <UiModal />}
 			</Container>
 		</Container>
 	);

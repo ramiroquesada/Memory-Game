@@ -6,9 +6,8 @@ import {
 	onSetAllCards,
 	onSetGameCards,
 	shuffleCards,
-	onSetNewRecord,
 	onWin,
-	onStartTimer
+	onStartTimer,
 } from '../redux/gameSlice';
 import {
 	onCloseModal,
@@ -19,7 +18,7 @@ import {
 export const useGameStore = () => {
 	const dispatch = useDispatch();
 
-	const { allCards, clickedCards, record, gameCards, gameOver, isWin, isPlaying } =
+	const { allCards, clickedCards, gameCards, gameOver, isWin, isPlaying } =
 		useSelector((state) => state.game);
 
 	const startGettingCards = async () => {
@@ -46,15 +45,10 @@ export const useGameStore = () => {
 			dispatch(onWin());
 			dispatch(onOpenModalWin());
 		} else if (clickedCards.includes(card)) {
-
-			if (clickedCards.length > record) {
-				localStorage.setItem('record', clickedCards.length);
-				dispatch(onSetNewRecord(localStorage.getItem('record')));
-			}
-			dispatch(onGameOver())
+			dispatch(onGameOver());
 			dispatch(onOpenModalLose());
 		} else {
-			if(clickedCards.length < 1){
+			if (clickedCards.length < 1) {
 				dispatch(onStartTimer());
 			}
 
@@ -73,15 +67,10 @@ export const useGameStore = () => {
 		dispatch(onSetGameCards());
 	};
 
-	const onNewRecord = (val) => {
-		dispatch(onSetNewRecord(val));
-	};
-
 	return {
 		allCards,
 		clickedCards,
 		gameCards,
-		record,
 		gameOver,
 		isWin,
 		isPlaying,
@@ -90,6 +79,5 @@ export const useGameStore = () => {
 		onAddToClicked,
 		onShuffleCards,
 		onNewGame,
-		onNewRecord,
 	};
 };

@@ -23,11 +23,10 @@ body {
 .modalContainer {
 	display: flex;
 	flex-direction: column;
-	margin: 0.2rem;
 	margin-bottom: 2rem;
 	gap: 1.5rem;
-	padding-left: 2rem;
-	padding-right: 2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 .modalContainer > h2 {
@@ -102,7 +101,15 @@ body {
 }
 
 .modal-fondo {
-	background-color: rgba(0, 0, 0, 0.514);
+	background-color: rgba(0, 0, 0, 0.8);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	position: fixed;
+}
+
+.modalNuevoRecord-fondo{
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -121,7 +128,7 @@ body {
 .modal {
 	background: white;
 	border-radius: 1rem;
-	color: rgb(44, 43, 43);
+	color: rgb(44, 44, 44);
 	display: inline;
 	max-height: 620px;
 	max-width: 500px;
@@ -271,8 +278,8 @@ body {
 
 .matching{
 	border: 5px solid;
-	animation: border-flash 510ms infinite;
-	-webkit-animation: border-flash 510ms infinite;
+	animation: border-flash 380ms infinite;
+	-webkit-animation: border-flash 380ms infinite;
 }
 
 
