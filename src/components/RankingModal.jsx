@@ -2,9 +2,11 @@ import { useEffect, useMemo } from 'react';
 import Modal from 'react-modal';
 
 import {
+	Paper,
 	Table,
 	TableBody,
 	TableCell,
+	TableContainer,
 	TableHead,
 	TableRow,
 } from '@mui/material';
@@ -56,36 +58,46 @@ export const RankingModal = () => {
 			className="modal"
 			overlayClassName="modal-fondo"
 			closeTimeoutMS={200}
-			onRequestClose={handleCloseRankingModal}>
-			<div className="modalContainer" style={{ margin: '1rem 0' }}>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell></TableCell>
-							<TableCell>Nombre</TableCell>
-							<TableCell>Tiempo</TableCell>
-							<TableCell>Clicks</TableCell>
-							<TableCell>Fecha</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{gameModeRecords?.map((record) => (
-							<TableRow key={record._id}>
-								<TableCell>
-									{gameModeRecords?.indexOf(record) + 1}º
-								</TableCell>
-								<TableCell>{record.name}</TableCell>
-								<TableCell>
-									{record.time.minutes}:{record.time.seconds}:
-									{record.time.miliseconds}
-								</TableCell>
-								<TableCell>{record.clicks}</TableCell>
-								<TableCell>{formatDate(record.date)}</TableCell>
+			onRequestClose={handleCloseRankingModal}
+			>
+			<Paper >
+				<TableContainer sx={{maxHeight: 500}}>
+					<Table stickyHeader >
+						<TableHead>
+							<TableRow>
+								<TableCell></TableCell>
+								<TableCell align="center">Nombre</TableCell>
+								<TableCell align="center">Tiempo</TableCell>
+								<TableCell align="center">Clicks</TableCell>
+								<TableCell align="center">Fecha</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</div>
+						</TableHead>
+						<TableBody>
+							{gameModeRecords?.map((record) => (
+								<TableRow key={record._id} hover>
+									<TableCell align="left">
+										{gameModeRecords?.indexOf(record) + 1}º
+									</TableCell>
+									<TableCell align="center">
+										{record.name}
+									</TableCell>
+									<TableCell align="center">
+										{record.time.minutes}:
+										{record.time.seconds}:
+										{record.time.miliseconds}
+									</TableCell>
+									<TableCell align="center">
+										{record.clicks}
+									</TableCell>
+									<TableCell align="center">
+										{formatDate(record.date)}
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</Paper>
 		</Modal>
 	);
 };

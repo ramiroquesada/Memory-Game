@@ -36,8 +36,6 @@ export const NuevoRecordModal = () => {
 
 	const { name, onInputChange, formState } = useForm(formData);
 
-	const [isLoading, setIsLoading] = useState(false)
-
 	const recordData = useMemo(() => {
 		const time = {
 			minutes: minutos,
@@ -74,8 +72,9 @@ export const NuevoRecordModal = () => {
 		closeModalNewRecord();
 	};
 
-	const handleRecordSubmit = async () => {
-		Swal.showLoading()
+	const handleRecordSubmit = async (e) => {
+		e.preventDefault();
+		Swal.showLoading();
 		const newRecord = { ...formState, ...recordData };
 		const recordPosted = await startPostingNewRecord(newRecord);
 		if (recordPosted) {
@@ -86,10 +85,10 @@ export const NuevoRecordModal = () => {
 			);
 			closeModalNewRecord();
 			if (isMemoryWin) {
-				localStorage.setItem('memoryRecord', JSON.stringify(newRecord))
+				localStorage.setItem('memoryRecord', JSON.stringify(newRecord));
 				onNewMemoryGame();
 			} else if (gameOver) {
-				localStorage.setItem('gameRecord', JSON.stringify(newRecord))
+				localStorage.setItem('gameRecord', JSON.stringify(newRecord));
 				onNewGame();
 			}
 		}
@@ -113,6 +112,9 @@ export const NuevoRecordModal = () => {
 						flexDirection: 'column',
 						gap: '1rem',
 					}}>
+					<Typography textAlign={'center'} className="newRecordMsg">
+						<strong>NUEVO RECORD</strong>
+					</Typography>
 					<Typography textAlign={'center'}>
 						Tu tiempo:{' '}
 						<strong>
@@ -124,6 +126,8 @@ export const NuevoRecordModal = () => {
 						Clicks: <strong>{recordData.clicks}</strong>
 					</Typography>
 					<TextField
+						autoFocus={true}
+						autoComplete="new-password"
 						name="name"
 						onChange={onInputChange}
 						label="Tu nombre"
@@ -131,6 +135,7 @@ export const NuevoRecordModal = () => {
 						type="text"
 						value={name}
 					/>
+
 					<Button
 						style={{ marginTop: '1rem' }}
 						variant="contained"
