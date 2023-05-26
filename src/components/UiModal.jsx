@@ -7,6 +7,7 @@ import { Button, Typography } from '@mui/material';
 import { useGameStore } from '../hooks/useGameStore';
 import { useMemoryStore } from '../hooks/useMemoryStore';
 import { useCronometroStore } from '../hooks/useCronometroStore';
+import { timeToMs } from '../helpers/timeToMs';
 
 const customStyles = {
 	content: {
@@ -31,6 +32,8 @@ export const UiModal = () => {
 	const [gameModeNull, setGameModeNull] = useState(
 		gameMode === null ? true : false
 	);
+
+	const [isNewRecord, setIsNewRecord] = useState(false);
 
 	const recordData = useMemo(() => {
 		const time = {
@@ -75,18 +78,43 @@ export const UiModal = () => {
 				jsConfetti.clearCanvas();
 			}
 		}
-	}, [recordData]);
 
-	if (isWin || isMemoryWin) {
-		const jsConfetti = new JSConfetti();
+		const lsMemoryRecord = JSON.parse(localStorage.getItem('memoryRecord'));
+		const lsGameRecord = JSON.parse(localStorage.getItem('gameRecord'));
 
-		for (let i = 0; i <= 2; i++) {
-			setTimeout(() => {
-				jsConfetti.addConfetti();
-			}, 1200 * +i);
-			jsConfetti.clearCanvas();
+		if (isMemoryWin) {
+			const currentMs = timeToMs(recordData.time);
+
+			if (!lsMemoryRecord) {
+				setIsNewRecord(true);
+			} else {
+				const lsMemoryMs = timeToMs(lsMemoryRecord.time);
+				if (currentMs < lsMemoryMs) {
+					setIsNewRecord(true);
+				} else if (
+					recordData.clicks <= lsMemoryRecord.clicks &&
+					currentMs <= lsMemoryMs
+				) {
+					setIsNewRecord(true);
+				}
+			}
+		} else if (gameOver) {
+			const currentMs = timeToMs(recordData.time);
+			if (!lsGameRecord) {
+				setIsNewRecord(true);
+			} else {
+				const lsGameMs = timeToMs(lsGameRecord.time);
+				if (recordData.clicks > lsGameRecord.clicks) {
+					setIsNewRecord(true);
+				} else if (
+					recordData.clicks >= lsGameRecord.clicks &&
+					currentMs <= lsGameMs
+				) {
+					setIsNewRecord(true);
+				}
+			}
 		}
-	}
+	}, [isWin, isMemoryWin]);
 
 	const selectGamemode1 = () => {
 		changeGameMode(1);
@@ -148,9 +176,22 @@ export const UiModal = () => {
 						<br />
 						Clicks: <strong>{recordData.clicks}</strong>
 					</Typography>
-					<Button variant="contained" onClick={onClickNewRecord}>
-						Publicar Record
-					</Button>
+
+					{isNewRecord && (
+						<>
+							<Typography
+								textAlign={'center'}
+								className="newRecordMsg">
+								<strong>NUEVO RECORD</strong>
+							</Typography>
+							<Button
+								variant="contained"
+								onClick={onClickNewRecord}>
+								Publicar Record
+							</Button>
+						</>
+					)}
+
 					<Button variant="outlined" onClick={onRestartGame}>
 						Jugar de nuevo
 					</Button>

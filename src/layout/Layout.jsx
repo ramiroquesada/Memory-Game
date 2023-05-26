@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import PsychologyOutlined from '@mui/icons-material/PsychologyOutlined';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import {
 	AppBar,
 	CssBaseline,
@@ -18,7 +19,6 @@ import { useUiStore } from '../hooks/useUiStore';
 import { UiModal } from '../components/UiModal';
 import { Memory } from '../components/Memory';
 import { Game } from '../components/Game';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { RankingModal } from '../components/RankingModal';
 import { NuevoRecordModal } from '../components/NuevoRecordModal';
 

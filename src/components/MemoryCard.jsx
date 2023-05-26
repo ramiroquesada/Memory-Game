@@ -34,8 +34,8 @@ export const MemoryCard = ({ data }) => {
 				background: `linear-gradient(180deg, #${data.gradient.join(
 					', #'
 				)})`,
-				maxHeight: '8rem',
-				maxWidth: '8rem',
+				maxHeight: '7rem',
+				maxWidth: '7rem',
 				borderRadius: '0.75rem',
 				alignContent: 'center',
 				marginLeft: 'auto',

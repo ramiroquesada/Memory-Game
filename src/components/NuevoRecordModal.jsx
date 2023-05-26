@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Modal from 'react-modal';
 
 import { Button, TextField, Typography } from '@mui/material';
@@ -35,6 +35,8 @@ export const NuevoRecordModal = () => {
 	const { isWin: isMemoryWin, onNewMemoryGame, flipCount } = useMemoryStore();
 
 	const { name, onInputChange, formState } = useForm(formData);
+
+	const [isLoading, setIsLoading] = useState(false)
 
 	const recordData = useMemo(() => {
 		const time = {
@@ -73,6 +75,7 @@ export const NuevoRecordModal = () => {
 	};
 
 	const handleRecordSubmit = async () => {
+		Swal.showLoading()
 		const newRecord = { ...formState, ...recordData };
 		const recordPosted = await startPostingNewRecord(newRecord);
 		if (recordPosted) {
@@ -83,8 +86,10 @@ export const NuevoRecordModal = () => {
 			);
 			closeModalNewRecord();
 			if (isMemoryWin) {
+				localStorage.setItem('memoryRecord', JSON.stringify(newRecord))
 				onNewMemoryGame();
 			} else if (gameOver) {
+				localStorage.setItem('gameRecord', JSON.stringify(newRecord))
 				onNewGame();
 			}
 		}

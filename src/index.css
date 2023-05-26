@@ -341,3 +341,36 @@ body {
 	-ms-border-radius: 0 0 0.65rem 0.65rem;
 	-o-border-radius: 0 0 0.65rem 0.65rem;
 }
+
+.newRecordMsg{
+	height: 1.1rem;
+	animation: newRecordTxt 400ms infinite;
+	-webkit-animation: newRecordTxt 400ms infinite;
+}
+
+@keyframes newRecordTxt {
+	0%{
+		font-size: 1rem;
+		color: #B70404;
+	}
+
+	40%{
+		color: #DB005B;
+	}
+	50%{
+		font-size: 1.05rem;
+
+	}
+
+	80%{
+		color: #F79327;
+	}
+	100%{
+		color: #DB005B;
+		font-size: 1rem;
+
+	}
+
+
+
+}
