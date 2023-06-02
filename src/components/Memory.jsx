@@ -47,6 +47,7 @@ export const Memory = () => {
 							item
 							key={card.uuid}
 							xs={3}
+							md={2}
 							sx={{
 								backgroundColor: 'transparent',
 								placeContent: 'center',
