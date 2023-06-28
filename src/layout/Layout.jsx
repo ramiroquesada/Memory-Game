@@ -101,7 +101,7 @@ export const Layout = () => {
 						<IconButton
 							color="white"
 							sx={{ marginBottom: '7px' }}
-							href="http://github.com/ramessj"
+							href="http://github.com/ramiroquesada"
 							target="_blank">
 							<PsychologyOutlined
 								sx={{ color: 'white', fontSize: '3rem' }}
